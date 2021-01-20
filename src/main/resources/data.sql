@@ -1,4 +1,3 @@
-
 insert into `user` (`first_name`, `last_name`,`phone`,`login`, `password`, `role`) values
 ('Сергій', 'Адміненко','11234567','admin@g.com', '$2a$11$geT/1yKaCbgb4r8hU9MKwOW0/kTB54ybw8QKqFEzRKiVTECoMgA52', 'ADMIN'),
 ('Іван', 'Менеджерский', '11234568','manager@g.com', '$2a$11$a5QZe8JIpb3BX5hcJNK2TOuboLMimjQZWR4PfMKYGhJsSMpoAtBSG', 'MANAGER'),

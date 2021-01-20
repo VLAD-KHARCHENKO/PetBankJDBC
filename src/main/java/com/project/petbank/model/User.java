@@ -8,17 +8,19 @@ public class User {
     private String lastName;
     private String email;
     private String password;
+    private boolean isActive;
     private Role role;
 
     public User() {
     }
 
-    public User(int id, String firstName, String lastName, String email, String password, Role role) {
+    public User(long id, String firstName, String lastName, String email, String password, boolean isActive, Role role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.isActive = isActive;
         this.role = role;
     }
 
@@ -62,6 +64,14 @@ public class User {
         this.password = password;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
     public Role getRole() {
         return role;
     }
@@ -78,6 +88,7 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", isActive=" + isActive +
                 ", role=" + role +
                 '}';
     }
