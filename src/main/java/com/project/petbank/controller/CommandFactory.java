@@ -1,8 +1,7 @@
 package com.project.petbank.controller;
 
-import com.project.petbank.controller.command.Command;
-import com.project.petbank.controller.command.HomeCommand;
-import com.project.petbank.controller.command.NotFoundCommand;
+import com.project.petbank.controller.command.*;
+import com.project.petbank.service.ServiceFactory;
 import org.apache.log4j.Logger;
 
 import java.util.HashMap;
@@ -48,12 +47,12 @@ public class CommandFactory {
 //        getCommandMap.put("edit-menu", new EditMenuCommand(
 //                ServiceFactory.getDishService()
 //        ));
-//        getCommandMap.put("login", new LoginCommand(
-//                ServiceFactory.getUserService()
-//        ));
-//        getCommandMap.put("register", new RegisterCommand(
-//                ServiceFactory.getUserService()
-//        ));
+       getCommandMap.put("login", new LoginCommand(
+              ServiceFactory.getUserService()
+       ));
+        getCommandMap.put("register", new RegisterCommand(
+                ServiceFactory.getUserService()
+        ));
 //        getCommandMap.put("dish", new DishCommand(
 //                ServiceFactory.getDishService()
 //        ));
@@ -84,12 +83,12 @@ public class CommandFactory {
 //        postCommandMap.put("invoice", new InvoiceCommand(
 //                ServiceFactory.getInvoiceService()
 //        ));
-//        postCommandMap.put("login", new LoginCommand(
-//                ServiceFactory.getUserService()
-//        ));
-//        postCommandMap.put("register", new RegisterCommand(
-//                ServiceFactory.getUserService()
-//        ));
+        postCommandMap.put("login", new LoginCommand(
+               ServiceFactory.getUserService()
+       ));
+        postCommandMap.put("register", new RegisterCommand(
+                ServiceFactory.getUserService()
+        ));
 //        postCommandMap.put("menu", new MenuCommand(
 //                ServiceFactory.getDishService(),
 //                ServiceFactory.getOrderService()
