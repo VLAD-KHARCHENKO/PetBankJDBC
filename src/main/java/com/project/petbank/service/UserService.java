@@ -6,17 +6,20 @@ import com.project.petbank.model.enums.Role;
 import com.project.petbank.repository.impl.UserDaoImpl;
 import com.project.petbank.utils.PasswordsUtil;
 import com.project.petbank.view.UserDTO;
-import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
+
 public class UserService {
 
     private static final Logger LOG = Logger.getLogger(UserService.class);
     private UserDaoImpl userDao;
+
+    public UserService(UserDaoImpl userDao) {
+        this.userDao = userDao;
+    }
 
     /**
      * Validates User's Login and checks if it corresponds with password
@@ -84,14 +87,14 @@ public class UserService {
      * @param password
      * @return
      */
-    public User registrationUser(String firstName, String lastName, String email, String password, boolean isActive, Role role) {
+    public User registrationUser(String firstName, String lastName, String email, String password) {
         String hashedPass = PasswordsUtil.hash(password.trim());
         User newUser = User.builder()
                 .firstName(firstName)
                 .lastName(lastName)
                 .email(email)
-                .password(password)
-                .isActive(isActive)
+                .password(hashedPass)
+                .isActive(true)
                 .role(Role.CUSTOMER)
                 .build();
         userDao.create(newUser);

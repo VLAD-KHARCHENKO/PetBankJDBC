@@ -12,10 +12,7 @@ public class User {
     private boolean isActive;
     private Role role;
 
-    public User(long aLong, String string, String resultSetString, String setString, String password, String s, Role role) {
-    }
-
-    public User(long id, String firstName, String lastName, String email, String password, boolean isActive, Role role) {
+       public User(long id, String firstName, String lastName, String email, String password, boolean isActive, Role role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

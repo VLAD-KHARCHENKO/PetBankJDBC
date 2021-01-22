@@ -142,7 +142,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao, GetAllDao
                 resultSet.getString(COLUMN_SECOND_NAME),
                 resultSet.getString(COLUMN_EMAIL),
                 resultSet.getString(COLUMN_PASSWORD),
-                resultSet.getString(COLUMN_IS_ACTIVE),
+                resultSet.getBoolean(COLUMN_IS_ACTIVE),
                 Role.valueOf(resultSet.getString(COLUMN_ROLE)));
     }
 }

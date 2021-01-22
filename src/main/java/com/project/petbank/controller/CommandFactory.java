@@ -17,7 +17,7 @@ public class CommandFactory {
         getCommandMap.put("index", new HomeCommand());
 //        getCommandMap.put("under-construction", new UnderConstructionCommand());
 //        getCommandMap.put("ui-elements", new ElementCommand());
-//        getCommandMap.put("admin", new AdminCommand());
+       getCommandMap.put("admin", new AdminCommand());
 //        getCommandMap.put("chart", new ChartCommand());
 //        getCommandMap.put("tab-panel", new TabPanelCommand());
 //        getCommandMap.put("table", new TableCommand());

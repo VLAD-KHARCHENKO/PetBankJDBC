@@ -1,7 +1,7 @@
 use petbank;
 
 insert into `user` (`first_name`, `last_name`,`email`, `password`, `isActive`, `role`) values
-('Сергій', 'Адміненко','admin@g.com', 'admin', true, 'ADMIN'),
+('Сергій', 'Адміненко','admin@g.com', '$2a$12$BzcrGYG77xPP4EtfdV1WtOCb67RtnTAvUmSPyOuB74ADsUeRsIlGW', true, 'ADMIN'),
 ('Папа', 'Карло', 'user1@g.com', 'password', true, 'CUSTOMER'),
 ('Буратіно','Карло', 'user2@g.com', 'password', true, 'CUSTOMER'),
 ('Федір', 'Дядя', 'user3@g.com', 'password', false, 'CUSTOMER'),
