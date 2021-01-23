@@ -9,9 +9,7 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import static com.project.petbank.view.PageUrlConstants.HOME_PAGE;
-import static com.project.petbank.view.PageUrlConstants.REGISTER_PAGE;
-
+import static com.project.petbank.view.PageUrlConstants.*;
 
 
 public class RegisterCommand extends UniCommand {
@@ -47,7 +45,7 @@ public class RegisterCommand extends UniCommand {
             User user = userService.getUserByLogin(email);
             session.setAttribute("user", user);
             LOG.info("registration user setAttribute: + " + user);
-            return new PageResponse(HOME_PAGE, true);
+            return new PageResponse(USER_PAGE, true);
         }
         request.setAttribute("notification", "Not valid login or password");
         return new PageResponse(REGISTER_PAGE);

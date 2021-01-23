@@ -18,6 +18,8 @@ public class CommandFactory {
 //        getCommandMap.put("under-construction", new UnderConstructionCommand());
 //        getCommandMap.put("ui-elements", new ElementCommand());
        getCommandMap.put("admin", new AdminCommand());
+       getCommandMap.put("user", new UserCommand() {
+       });
 //        getCommandMap.put("chart", new ChartCommand());
 //        getCommandMap.put("tab-panel", new TabPanelCommand());
 //        getCommandMap.put("table", new TableCommand());
@@ -31,7 +33,7 @@ public class CommandFactory {
 //        getCommandMap.put("specialties", new SpecialtiesCommand());
 //        getCommandMap.put("error", new ErrorCommand());
 //        getCommandMap.put("language", new LanguageCommand());
-//        getCommandMap.put("logout", new LogoutCommand());
+      getCommandMap.put("logout", new LogoutCommand());
 //        getCommandMap.put("403-error", new ForbiddenCommand());
 //        getCommandMap.put("404-error", defaultCommand);
 //        getCommandMap.put("order-list", new OrderListCommand(
@@ -80,8 +82,8 @@ public class CommandFactory {
 //        ));
 //
 //
-//        postCommandMap.put("invoice", new InvoiceCommand(
-//                ServiceFactory.getInvoiceService()
+//        postCommandMap.put("admin", new AdminCommand(
+//                ServiceFactory.getUserService()
 //        ));
         postCommandMap.put("login", new LoginCommand(
                ServiceFactory.getUserService()
