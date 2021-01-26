@@ -8,8 +8,10 @@ public class PageUrlConstants {
     public static final String ADMIN_PAGE = "admin";
     public static final String NOT_FOUND_PAGE = "errors/404-error";
     public static final String UNDER_CONSTRUCTION_PAGE = "errors/under-construction";
-    public static final String SERVICES_PAGE = "services";
-    public static final String CONTACT_PAGE = "contacts";
+    public static final String PAYMENTS_PAGE = "payments";
+    public static final String CARDS_PAGE = "cards";
+    public static final String STATEMENTS_PAGE = "statements";
+    public static final String USERS_PAGE = "users";
     public static final String LOGIN_PAGE = "login";
     public static final String REGISTER_PAGE = "register";
     public static final String BLOG_PAGE = "blog-masonry";
@@ -24,6 +26,5 @@ public class PageUrlConstants {
     public static final String ORDER_COMMENT_PAGE = "order-comment";
     public static final String FORBIDDEN_PAGE = "errors/403-error";
     public static final String USER_PROFILE_PAGE = "user-profile";
-    public static final String USERS_PAGE = "users";
-    public static final String REDIRECT_HOME_PAGE = "/";
+     public static final String REDIRECT_HOME_PAGE = "/";
 }

@@ -7,8 +7,8 @@
 <html lang="en">
 
 <head>
-     <title>500</title>
-    <c:import url="../templ/head-part.jsp"/>
+     <title>Payments</title>
+    <c:import url="templ/head-part.jsp"/>
 
    </head>
 
@@ -17,25 +17,20 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <c:import url="../templ/header-part.jsp"/>
+        <c:import url="templ/header-part.jsp"/>
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
             <div id="content">
 
-                <c:import url="../templ/topbar-part.jsp"/>
+                <c:import url="templ/topbar-part.jsp"/>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- 500 Error Text -->
-                    <div class="text-center">
-                        <div class="error mx-auto" data-text="500">500</div>
-                        <p class="lead text-gray-800 mb-5">Page Not Found</p>
-                        <p class="text-gray-500 mb-0">It looks like you found a glitch in the matrix...</p>
-                        <a href="index">&larr; Back to Dashboard</a>
-                    </div>
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">Statements Page</h1>
 
                 </div>
                 <!-- /.container-fluid -->
@@ -44,7 +39,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <c:import url="../templ/footer-part.jsp"/>
+            <c:import url="templ/footer-part.jsp"/>
             <!-- End of Footer -->
 
         </div>
@@ -54,8 +49,8 @@
     <!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
-    <c:import url="../templ/logout-part.jsp"/>
-    <c:import url="../templ/loader-part.jsp"/>
+    <c:import url="templ/logout-part.jsp"/>
+    <c:import url="templ/loader-part.jsp"/>
 
 </body>
 

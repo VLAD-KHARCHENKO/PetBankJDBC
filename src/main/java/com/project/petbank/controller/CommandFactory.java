@@ -20,7 +20,9 @@ public class CommandFactory {
        getCommandMap.put("admin", new AdminCommand());
        getCommandMap.put("user", new UserCommand() {
        });
-//        getCommandMap.put("chart", new ChartCommand());
+        getCommandMap.put("payments", new PaymentCommand());
+        getCommandMap.put("statements", new StatementsCommand());
+        getCommandMap.put("cards", new CardsCommand());
 //        getCommandMap.put("tab-panel", new TabPanelCommand());
 //        getCommandMap.put("table", new TableCommand());
 //        getCommandMap.put("form", new FormCommand());
@@ -32,8 +34,9 @@ public class CommandFactory {
 //        getCommandMap.put("reservation", new ReservationCommand());
 //        getCommandMap.put("specialties", new SpecialtiesCommand());
 //        getCommandMap.put("error", new ErrorCommand());
-//        getCommandMap.put("language", new LanguageCommand());
+       getCommandMap.put("language", new LanguageCommand());
       getCommandMap.put("logout", new LogoutCommand());
+      getCommandMap.put("users", new UsersCommand(ServiceFactory.getUserService()));
 //        getCommandMap.put("403-error", new ForbiddenCommand());
 //        getCommandMap.put("404-error", defaultCommand);
 //        getCommandMap.put("order-list", new OrderListCommand(
@@ -95,9 +98,18 @@ public class CommandFactory {
 //                ServiceFactory.getDishService(),
 //                ServiceFactory.getOrderService()
 //        ));
-//        postCommandMap.put("edit-menu", new EditMenuCommand(
-//                ServiceFactory.getDishService()
-//        ));
+       postCommandMap.put("payments", new PaymentCommand(
+               ServiceFactory.getUserService()
+        ));
+       postCommandMap.put("statements", new StatementsCommand(
+               ServiceFactory.getUserService()
+        ));
+       postCommandMap.put("cards", new CardsCommand(
+               ServiceFactory.getUserService()
+        ));
+       postCommandMap.put("users", new UsersCommand(
+               ServiceFactory.getUserService()
+        ));
 //        postCommandMap.put("dish", new DishCommand(
 //                ServiceFactory.getDishService()
 //        ));

@@ -49,7 +49,6 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao, GetAllDao
             + "WHERE " + COLUMN_ID + " = ?";
 
 
-
     @Override
     public boolean isUserExists(String email) {
         String query = "SELECT 1 FROM `user` WHERE " + COLUMN_EMAIL + " = ?";
@@ -85,6 +84,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao, GetAllDao
 
     @Override
     public List<User> getAllPaginated(int page, int size) {
+        LOG.debug("getAllPaginated : ");
         int limit = (page - 1) * size;
         return getAll(SELECT_ALL_USERS_PAGINATED,
                 ps -> {

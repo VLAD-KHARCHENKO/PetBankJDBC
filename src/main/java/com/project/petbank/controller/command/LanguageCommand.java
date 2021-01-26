@@ -1,7 +1,7 @@
-package com.restaurant.controller.command.admin;
+package com.project.petbank.controller.command;
 
-import com.restaurant.controller.command.Command;
-import com.restaurant.controller.data.PageResponse;
+
+import com.project.petbank.controller.data.PageResponse;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;

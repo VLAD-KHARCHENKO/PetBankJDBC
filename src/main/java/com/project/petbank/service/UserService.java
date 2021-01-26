@@ -111,6 +111,12 @@ public class UserService {
         return mapToUserDTO(all);
     }
 
+    public List<UserDTO> getAllPaginated(int page, int size) {
+        LOG.info("getAllPaginated:");
+        List<User> all = userDao.getAllPaginated(page, size);
+        LOG.info("Get all users:" + all);
+        return mapToUserDTO(all);
+    }
     /**
      * Adds List User to List UserDTO
      *

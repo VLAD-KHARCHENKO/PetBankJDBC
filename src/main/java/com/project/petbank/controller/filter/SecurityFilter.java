@@ -40,7 +40,7 @@ public class SecurityFilter implements Filter {
 
         if (!hasPermission) {
             LOG.info("User has no permission : " + user + " , " + path);
-            resp.sendRedirect(contextPath + "/403.jsp");
+            resp.sendRedirect(contextPath + "/403");
             return;
         }
 

@@ -54,6 +54,7 @@
     <!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
+    <c:import url="../templ/logout-part.jsp"/>
     <c:import url="../templ/loader-part.jsp"/>
 
 </body>

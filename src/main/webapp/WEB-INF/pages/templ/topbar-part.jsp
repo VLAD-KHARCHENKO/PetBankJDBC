@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${locale}"/>
 <fmt:setBundle basename="${bundle}"/>
@@ -50,9 +51,22 @@
                 </form>
             </div>
         </li>
+        <li class="nav-item">
+            <c:choose>
+                <c:when test="${locale=='en'}">
+                    <a href="language?locale=uk_UA" class="nav-link">UA</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="language?locale=en" class="nav-link">EN</a>
+                </c:otherwise>
+            </c:choose>
+        </li>
 
         <!-- Nav Item - Alerts -->
         <li class="nav-item dropdown no-arrow mx-1">
+
+
+
             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
@@ -118,7 +132,7 @@
                 </h6>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                        <img class="rounded-circle" src="../static/img/undraw_profile_1.svg"
                              alt="">
                         <div class="status-indicator bg-success"></div>
                     </div>
@@ -130,7 +144,7 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                        <img class="rounded-circle" src="static/img/undraw_profile_2.svg"
                              alt="">
                         <div class="status-indicator"></div>
                     </div>
@@ -142,7 +156,7 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                        <img class="rounded-circle" src="static/img/undraw_profile_3.svg"
                              alt="">
                         <div class="status-indicator bg-warning"></div>
                     </div>
@@ -172,32 +186,60 @@
 
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
-            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                <img class="img-profile rounded-circle"
-                     src="img/undraw_profile.svg">
-            </a>
+
+            <c:choose>
+                <c:when test="${not empty user}">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown1" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">${user.firstName} ${user.lastName}</span>
+                        <img class="img-profile rounded-circle"
+                             src="static/img/undraw_profile.svg">
+                    </a>
+                </c:when>
+                <c:otherwise>
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Login</span>
+                        <img class="img-profile rounded-circle"
+                             src="static/img/undraw_profile.svg">
+                    </a>
+                </c:otherwise>
+            </c:choose>
+
+
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                  aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Settings
-                </a>
-                <a class="dropdown-item" href="#">
-                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Activity Log
-                </a>
+                <c:if test="${not empty user}">
+                    <a class="dropdown-item" href="user">
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        <fmt:message key="profile"/>
+                    </a>
+                </c:if>
+
+
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Logout
-                </a>
+
+                <c:choose>
+                    <c:when test="${not empty user}">
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            <fmt:message key="logout"/>
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a class="dropdown-item" href="login"  >
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Login
+                        </a>
+                        <a class="dropdown-item" href="register"  >
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Registration
+                        </a>
+                    </c:otherwise>
+                </c:choose>
+
+
             </div>
         </li>
 
