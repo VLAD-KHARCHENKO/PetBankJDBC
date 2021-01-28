@@ -36,7 +36,7 @@ public class UsersCommand extends UniCommand {
             page = Integer.parseInt(pageStr);
         }
         if (isNull(sizeStr)) {
-            size = 3;
+            size = 30;
         } else {
             size = Integer.parseInt(sizeStr);
         }

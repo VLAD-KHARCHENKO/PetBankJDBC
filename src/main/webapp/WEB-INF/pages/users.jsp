@@ -48,16 +48,7 @@
                                     <th>Role</th>
                                 </tr>
                                 </thead>
-                                <tfoot>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>First name</th>
-                                    <th>Last name</th>
-                                    <th>Email</th>
-                                    <th>isActive</th>
-                                    <th>Role</th>
-                                </tr>
-                                </tfoot>
+
                                 <tbody>
                                 <c:forEach items="${users}" var="user">
                                     <tr>
@@ -65,7 +56,7 @@
                                         <td>${user.firstName}</td>
                                         <td>${user.lastName}</td>
                                         <td>${user.email}</td>
-                                        <td></td>
+                                        <td>${user.active}</td>
                                         <td>${user.role}</td>
                                     </tr>
                                 </c:forEach>

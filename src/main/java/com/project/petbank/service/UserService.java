@@ -79,14 +79,7 @@ public class UserService {
         return userDao.getByLogin(login);
     }
 
-    /**
-     * Converts data from Post request to User and stores it into DB
-     *
-     * @param name
-     * @param login
-     * @param password
-     * @return
-     */
+
     public User registrationUser(String firstName, String lastName, String email, String password) {
         String hashedPass = PasswordsUtil.hash(password.trim());
         User newUser = User.builder()
@@ -117,6 +110,7 @@ public class UserService {
         LOG.info("Get all users:" + all);
         return mapToUserDTO(all);
     }
+
     /**
      * Adds List User to List UserDTO
      *
@@ -126,15 +120,14 @@ public class UserService {
     private List<UserDTO> mapToUserDTO(List<User> all) {
         return all.stream().map(users -> {
             User userProfile = userDao.getById(users.getId());
-            UserDTO userDTO = UserDTO.builder()
-                    .id(userProfile.getId())
-                    .firstName(userProfile.getFirstName())
-                    .lastName(userProfile.getLastName())
-                    .email(userProfile.getEmail())
-                    .password(userProfile.getPassword())
-                    .isActive(userProfile.isActive())
-                    .role(userProfile.getRole())
-                    .build();
+            UserDTO userDTO = new UserDTO(
+                    userProfile.getId(),
+                    userProfile.getFirstName(),
+                    userProfile.getLastName(),
+                    userProfile.getEmail(),
+                    userProfile.isActive() ? "Active" : "Blocked",
+                    userProfile.getRole()
+            );
 
             return userDTO;
         }).collect(Collectors.toList());
