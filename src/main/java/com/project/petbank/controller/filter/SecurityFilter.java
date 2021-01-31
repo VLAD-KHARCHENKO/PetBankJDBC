@@ -50,7 +50,7 @@ public class SecurityFilter implements Filter {
 
     private String getPath(HttpServletRequest req) {
         String requestUri = req.getRequestURI();
-        int indexFrom = requestUri.lastIndexOf("theatre/") + 8;
+        int indexFrom = requestUri.lastIndexOf("petbank/") + 8;
         String endPoint = requestUri.substring(indexFrom);
         if (endPoint.contains("/")) {
             int indexTo = endPoint.lastIndexOf('/');

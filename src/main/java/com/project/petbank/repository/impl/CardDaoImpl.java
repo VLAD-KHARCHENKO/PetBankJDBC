@@ -93,7 +93,7 @@ public class CardDaoImpl extends AbstractDao<Card> implements GetAllDao<Card> {
 
     @Override
     public Card create(Card entity) {
-        LOG.debug("Create user: + " + entity);
+        LOG.debug("Create card: + " + entity);
         long id = super.create(INSERT_INTO_CARD, ps -> {
             ps.setString(1, entity.getCardName().toString());
             ps.setString(2, entity.getNumber());
@@ -106,7 +106,7 @@ public class CardDaoImpl extends AbstractDao<Card> implements GetAllDao<Card> {
 
     @Override
     public boolean update(Card entity) {
-        LOG.debug("Update user: " + entity);
+        LOG.debug("Update card: " + entity);
         return update(UPDATE_CARD, ps -> {
             ps.setString(1, entity.getCardName().toString());
             ps.setString(2, entity.getNumber());
@@ -118,7 +118,7 @@ public class CardDaoImpl extends AbstractDao<Card> implements GetAllDao<Card> {
 
     @Override
     public boolean remove(Card entity) {
-        LOG.debug("Delete user: " + entity);
+        LOG.debug("Delete card: " + entity);
         return remove(DELETE_CARD, ps -> ps.setLong(1, entity.getId()));
     }
 

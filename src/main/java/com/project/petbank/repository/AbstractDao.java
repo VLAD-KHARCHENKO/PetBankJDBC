@@ -2,6 +2,7 @@ package com.project.petbank.repository;
 
 
 import com.project.petbank.config.ConnectionFactory;
+import com.project.petbank.model.Account;
 import lombok.RequiredArgsConstructor;
 import org.apache.log4j.Logger;
 

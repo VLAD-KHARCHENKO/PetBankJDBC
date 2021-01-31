@@ -17,13 +17,15 @@ public class CommandFactory {
         getCommandMap.put("index", new HomeCommand());
 //        getCommandMap.put("under-construction", new UnderConstructionCommand());
 //        getCommandMap.put("ui-elements", new ElementCommand());
-       getCommandMap.put("admin", new AdminCommand());
-       getCommandMap.put("user", new UserCommand() {
-       });
+        getCommandMap.put("admin", new AdminCommand());
+        getCommandMap.put("user", new UserCommand() {
+        });
         getCommandMap.put("payments", new PaymentCommand());
         getCommandMap.put("statements", new StatementsCommand());
         getCommandMap.put("cards", new CardsCommand(ServiceFactory.getCardService()));
-//        getCommandMap.put("tab-panel", new TabPanelCommand());
+        getCommandMap.put("accounts", new AccountCommand(ServiceFactory.getAccountService()));
+        getCommandMap.put("profile", new ProfileCommand());
+
 //        getCommandMap.put("table", new TableCommand());
 //        getCommandMap.put("form", new FormCommand());
 //        getCommandMap.put("empty", new EmptyCommand());
@@ -34,9 +36,9 @@ public class CommandFactory {
 //        getCommandMap.put("reservation", new ReservationCommand());
 //        getCommandMap.put("specialties", new SpecialtiesCommand());
 //        getCommandMap.put("error", new ErrorCommand());
-       getCommandMap.put("language", new LanguageCommand());
-      getCommandMap.put("logout", new LogoutCommand());
-      getCommandMap.put("users", new UsersCommand(ServiceFactory.getUserService()));
+        getCommandMap.put("language", new LanguageCommand());
+        getCommandMap.put("logout", new LogoutCommand());
+        getCommandMap.put("users", new UsersCommand(ServiceFactory.getUserService()));
 //        getCommandMap.put("403-error", new ForbiddenCommand());
 //        getCommandMap.put("404-error", defaultCommand);
 //        getCommandMap.put("order-list", new OrderListCommand(
@@ -52,9 +54,9 @@ public class CommandFactory {
 //        getCommandMap.put("edit-menu", new EditMenuCommand(
 //                ServiceFactory.getDishService()
 //        ));
-       getCommandMap.put("login", new LoginCommand(
-              ServiceFactory.getUserService()
-       ));
+        getCommandMap.put("login", new LoginCommand(
+                ServiceFactory.getUserService()
+        ));
         getCommandMap.put("register", new RegisterCommand(
                 ServiceFactory.getUserService()
         ));
@@ -89,8 +91,8 @@ public class CommandFactory {
 //                ServiceFactory.getUserService()
 //        ));
         postCommandMap.put("login", new LoginCommand(
-               ServiceFactory.getUserService()
-       ));
+                ServiceFactory.getUserService()
+        ));
         postCommandMap.put("register", new RegisterCommand(
                 ServiceFactory.getUserService()
         ));
@@ -98,18 +100,24 @@ public class CommandFactory {
 //                ServiceFactory.getDishService(),
 //                ServiceFactory.getOrderService()
 //        ));
-       postCommandMap.put("payments", new PaymentCommand(
-               ServiceFactory.getUserService()
+        postCommandMap.put("payments", new PaymentCommand(
+                ServiceFactory.getUserService()
         ));
-       postCommandMap.put("statements", new StatementsCommand(
-               ServiceFactory.getUserService()
+        postCommandMap.put("statements", new StatementsCommand(
+                ServiceFactory.getUserService()
         ));
-       postCommandMap.put("cards", new CardsCommand(
-               ServiceFactory.getCardService()
+        postCommandMap.put("cards", new CardsCommand(
+                ServiceFactory.getCardService()
         ));
-       postCommandMap.put("users", new UsersCommand(
-               ServiceFactory.getUserService()
+        postCommandMap.put("users", new UsersCommand(
+                ServiceFactory.getUserService()
         ));
+        postCommandMap.put("accounts", new AccountCommand(
+                ServiceFactory.getAccountService()
+        ));
+
+        postCommandMap.put("profile", new ProfileCommand());
+
 //        postCommandMap.put("dish", new DishCommand(
 //                ServiceFactory.getDishService()
 //        ));

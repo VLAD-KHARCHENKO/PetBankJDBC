@@ -15,6 +15,9 @@ public class ServiceFactory {
     private static CardService cardService = new CardService(
             DaoFactory.getCardDao()
     );
+    private static AccountService accountService = new AccountService(
+            DaoFactory.getAccountDao()
+    );
 //    private static DishService dishService = new DishService(
 //            DaoFactory.getDishDao()
 //    );
@@ -33,6 +36,9 @@ public class ServiceFactory {
     }
     public static CardService getCardService() {
         return cardService;
+    }
+    public static AccountService getAccountService() {
+        return accountService;
     }
 
 //    public static DishService getDishService() {

@@ -211,7 +211,7 @@
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                  aria-labelledby="userDropdown">
                 <c:if test="${not empty user}">
-                    <a class="dropdown-item" href="user">
+                    <a class="dropdown-item" href="profile?id=${user.id}">
                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                         <fmt:message key="profile"/>
                     </a>

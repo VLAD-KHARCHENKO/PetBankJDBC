@@ -14,6 +14,9 @@ public class PageUrlConstants {
     public static final String USERS_PAGE = "users";
     public static final String LOGIN_PAGE = "login";
     public static final String REGISTER_PAGE = "register";
+    public static final String ACCOUNTS_PAGE = "accounts";
+    public static final String PROFILE_PAGE = "profile";
+    public static final String USER_DELETE_PAGE = "user-delete";
     public static final String BLOG_PAGE = "blog-masonry";
     public static final String BLOG_POST_PAGE = "blog-post";
     public static final String GALLERY_PAGE = "gallery-masonry";
@@ -22,9 +25,7 @@ public class PageUrlConstants {
     public static final String FEEDBACK_PAGE = "feedback";
     public static final String TEAM_PAGE = "team";
     public static final String TEAM_PROFILE_PAGE = "team-member-profile";
-    public static final String PROFILE_PAGE = "profile";
     public static final String ORDER_COMMENT_PAGE = "order-comment";
     public static final String FORBIDDEN_PAGE = "errors/403-error";
-    public static final String USER_PROFILE_PAGE = "user-profile";
-     public static final String REDIRECT_HOME_PAGE = "/";
+    public static final String REDIRECT_HOME_PAGE = "/";
 }

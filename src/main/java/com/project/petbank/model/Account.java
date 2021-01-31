@@ -11,14 +11,21 @@ public class Account {
     private boolean isActive;
     private long userId;
 
-    public Account() {
-    }
+
 
     public Account(long id, String number, BigDecimal balance, List<Card> cards, boolean isActive, long userId) {
         this.id = id;
         this.number = number;
         this.balance = balance;
         this.cards = cards;
+        this.isActive = isActive;
+        this.userId = userId;
+    }
+
+    public Account(long id, String number, BigDecimal balance, boolean isActive, long userId) {
+        this.id = id;
+        this.number = number;
+        this.balance = balance;
         this.isActive = isActive;
         this.userId = userId;
     }

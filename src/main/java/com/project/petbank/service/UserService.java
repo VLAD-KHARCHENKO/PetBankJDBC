@@ -47,6 +47,14 @@ public class UserService {
         return !userDao.isUserExists(login);
     }
 
+    public boolean validateLoginByUpdate(String login, long id) {
+        if (userDao.isUserExists(login)) {
+            LOG.info(userDao.getById(id).equals(userDao.getByLogin(login)));
+            return userDao.getById(id).equals(userDao.getByLogin(login));
+        }
+        return true;
+    }
+
     /**
      * Validates whether confirmPasswords corresponds with Password
      *
@@ -131,5 +139,16 @@ public class UserService {
 
             return userDTO;
         }).collect(Collectors.toList());
+    }
+
+    public User updateUser(long id, String firstName, String lastName, String email, String password, boolean active, Role role) {
+        User updatedUser = new User(id, firstName, lastName, email, password, active, role);
+        userDao.update(updatedUser);
+        return updatedUser;
+    }
+
+    public void deleteUser(int id) {
+        User deleteUser = getUser(id);
+        userDao.remove(deleteUser);
     }
 }

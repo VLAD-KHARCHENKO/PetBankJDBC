@@ -59,6 +59,11 @@
                     <i class="fas fa-users"></i>
                     <span>Users</span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="accounts">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>Accounts</span></a>
+            </li>
         </c:when>
         <c:otherwise>
             <a href=""></a>

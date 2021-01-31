@@ -46,6 +46,7 @@
                                     <th>Email</th>
                                     <th>isActive</th>
                                     <th>Role</th>
+                                    <th>Edit</th>
                                 </tr>
                                 </thead>
 
@@ -58,6 +59,9 @@
                                         <td>${user.email}</td>
                                         <td>${user.active}</td>
                                         <td>${user.role}</td>
+                                        <td>
+                                            <a href="profile?id=${user.id}" class="search_link">Edit</a>
+                                        </td>
                                     </tr>
                                 </c:forEach>
 

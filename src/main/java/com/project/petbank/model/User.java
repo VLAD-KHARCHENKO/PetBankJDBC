@@ -2,6 +2,9 @@ package com.project.petbank.model;
 
 import com.project.petbank.model.enums.Role;
 import lombok.*;
+
+import java.util.Objects;
+
 @Builder
 public class User {
     private long id;
@@ -21,6 +24,8 @@ public class User {
         this.isActive = isActive;
         this.role = role;
     }
+
+
 
     public long getId() {
         return id;
@@ -76,6 +81,25 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id &&
+                isActive == user.isActive &&
+                Objects.equals(firstName, user.firstName) &&
+                Objects.equals(lastName, user.lastName) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(password, user.password) &&
+                role == user.role;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, email, password, isActive, role);
     }
 
     @Override

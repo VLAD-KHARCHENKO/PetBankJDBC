@@ -3,6 +3,7 @@ package com.project.petbank.repository;
 
 import com.project.petbank.config.ConnectionFactory;
 import com.project.petbank.config.DataSourceConnectionPool;
+import com.project.petbank.repository.impl.AccountDaoImpl;
 import com.project.petbank.repository.impl.CardDaoImpl;
 import com.project.petbank.repository.impl.UserDaoImpl;
 
@@ -12,6 +13,7 @@ public class DaoFactory {
 
     private static final UserDaoImpl USER_DAO = new UserDaoImpl(CONNECTION_FACTORY);
     private static final CardDaoImpl CARD_DAO = new CardDaoImpl(CONNECTION_FACTORY);
+    private static final AccountDaoImpl ACCOUNT_DAO = new AccountDaoImpl(CONNECTION_FACTORY);
 //    private static final DishDaoImpl DISH_DAO = new DishDaoImpl(CONNECTION_FACTORY);
 //    private static final OrderDaoImpl ORDER_DAO = new OrderDaoImpl(CONNECTION_FACTORY);
 //    private static final OrderDishDaoImpl ORDER_DISH_DAO = new OrderDishDaoImpl(CONNECTION_FACTORY);
@@ -24,9 +26,9 @@ public class DaoFactory {
         return CARD_DAO;
     }
 
-//    public static DishDaoImpl getDishDao() {
-//        return DISH_DAO;
-//    }
+   public static AccountDaoImpl getAccountDao() {
+       return ACCOUNT_DAO;
+    }
 //
 //    public static OrderDaoImpl getOrderDao() {
 //        return ORDER_DAO;

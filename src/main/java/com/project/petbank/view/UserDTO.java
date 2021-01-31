@@ -15,7 +15,7 @@ public class UserDTO {
     private String firstName;
     private String lastName;
     private String email;
-    private String active;
+       private String active;
     private Role role;
 
     public UserDTO(long id, String firstName, String lastName, String email, String active, Role role) {
@@ -61,6 +61,8 @@ public class UserDTO {
         this.email = email;
     }
 
+
+
     public String getActive() {
         return active;
     }
@@ -78,24 +80,6 @@ public class UserDTO {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserDTO userDTO = (UserDTO) o;
-        return id == userDTO.id &&
-                Objects.equals(firstName, userDTO.firstName) &&
-                Objects.equals(lastName, userDTO.lastName) &&
-                Objects.equals(email, userDTO.email) &&
-                Objects.equals(active, userDTO.active) &&
-                role == userDTO.role;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, active, role);
-    }
-
-    @Override
     public String toString() {
         return "UserDTO{" +
                 "id=" + id +
@@ -105,5 +89,23 @@ public class UserDTO {
                 ", active='" + active + '\'' +
                 ", role=" + role +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserDTO userDTO = (UserDTO) o;
+        return id == userDTO.id &&
+                Objects.equals(firstName, userDTO.firstName) &&
+                Objects.equals(lastName, userDTO.lastName) &&
+                Objects.equals(email, userDTO.email) &&
+                               Objects.equals(active, userDTO.active) &&
+                role == userDTO.role;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, email, active, role);
     }
 }
