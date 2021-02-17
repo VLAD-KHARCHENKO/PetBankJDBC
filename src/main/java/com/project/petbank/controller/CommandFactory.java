@@ -25,6 +25,7 @@ public class CommandFactory {
         getCommandMap.put("cards", new CardsCommand(ServiceFactory.getCardService()));
         getCommandMap.put("accounts", new AccountCommand(ServiceFactory.getAccountService()));
         getCommandMap.put("profile", new ProfileCommand());
+        getCommandMap.put("pending-cards", new PendingCardsCommand());
 
 //        getCommandMap.put("table", new TableCommand());
 //        getCommandMap.put("form", new FormCommand());
@@ -117,6 +118,7 @@ public class CommandFactory {
         ));
 
         postCommandMap.put("profile", new ProfileCommand());
+        postCommandMap.put("pending-cards", new PendingCardsCommand());
 
 //        postCommandMap.put("dish", new DishCommand(
 //                ServiceFactory.getDishService()

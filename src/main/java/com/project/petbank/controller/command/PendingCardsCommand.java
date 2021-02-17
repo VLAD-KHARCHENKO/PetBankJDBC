@@ -8,20 +8,21 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static com.project.petbank.view.PageUrlConstants.CARDS_PAGE;
+import static com.project.petbank.view.PageUrlConstants.PENDING_PAGE;
 import static com.project.petbank.view.PageUrlConstants.USERS_PAGE;
 import static java.util.Objects.isNull;
 
 
-public class CardsCommand extends UniCommand {
-    private CardService cardService;
-    private static final Logger LOG = Logger.getLogger(CardsCommand.class);
+public class PendingCardsCommand extends UniCommand {
+  private CardService cardService;
+    private static final Logger LOG = Logger.getLogger(PendingCardsCommand.class);
 
-    public CardsCommand(CardService cardService) {
+    public PendingCardsCommand(CardService cardService) {
         this.cardService = cardService;
     }
 
-    public CardsCommand() {
+    public PendingCardsCommand() {
+
     }
 
     @Override
@@ -40,11 +41,13 @@ public class CardsCommand extends UniCommand {
 //        } else {
 //            size = Integer.parseInt(sizeStr);
 //        }
-       // LOG.info("page="+page+" size="+size);
-        request.setAttribute("cards", cardService.getAll());
-        LOG.info("Set cards");
+//        LOG.info("page="+page+" size="+size);
 
-        return new PageResponse(CARDS_PAGE);
+
+       request.setAttribute("pendingCards", cardService.getPendingCard());
+        LOG.info("Set pendingCards");
+
+        return new PageResponse(PENDING_PAGE);
     }
 
     @Override

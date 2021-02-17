@@ -3,7 +3,7 @@ package com.project.petbank.view;
 public class PageUrlConstants {
 
     public static final String HOME_PAGE = "index";
-    public static final String USER_PAGE = "user";
+    public static final String USER_PAGE = "index";
     public static final String ORDER_PAGE = "order";
     public static final String ADMIN_PAGE = "admin";
     public static final String NOT_FOUND_PAGE = "errors/404-error";
@@ -16,6 +16,7 @@ public class PageUrlConstants {
     public static final String REGISTER_PAGE = "register";
     public static final String ACCOUNTS_PAGE = "accounts";
     public static final String PROFILE_PAGE = "profile";
+    public static final String PENDING_PAGE = "pending-cards";
     public static final String USER_DELETE_PAGE = "user-delete";
     public static final String BLOG_PAGE = "blog-masonry";
     public static final String BLOG_POST_PAGE = "blog-post";

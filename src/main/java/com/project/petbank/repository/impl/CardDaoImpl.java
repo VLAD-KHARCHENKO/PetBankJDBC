@@ -26,6 +26,7 @@ public class CardDaoImpl extends AbstractDao<Card> implements GetAllDao<Card> {
     private static final String COLUMN_ACCOUNT_ID = "account_id";
     private static final String SELECT_ALL_CARDS = "SELECT * FROM `card` ";
     private static final String SELECT_ALL_CARDS_PAGINATED = "SELECT * FROM `card` LIMIT ?,?";
+    private static final String SELECT_PENDING_CARDS = "SELECT * FROM `card` WHERE isActive = 'true'";
     //  private static final String SELECT_ALL_FOR_CARD = "SELECT card_name, isActive, number"+
     //   "FROM `card` JOIN `account` ON card.account_id = account.id";
 
@@ -49,6 +50,11 @@ public class CardDaoImpl extends AbstractDao<Card> implements GetAllDao<Card> {
     @Override
     public List<Card> getAll() {
         return getAll(SELECT_ALL_CARDS, getMapper());
+    }
+
+
+    public List<Card> getPendingCards() {
+        return getAll(SELECT_PENDING_CARDS, getMapper());
     }
 
     @Override

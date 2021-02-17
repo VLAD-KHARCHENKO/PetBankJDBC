@@ -41,12 +41,12 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>First name</th>
-                                    <th>Last name</th>
-                                    <th>Email</th>
-                                    <th>isActive</th>
-                                    <th>Role</th>
-                                    <th>Edit</th>
+                                    <th><fmt:message key="first.name"/></th>
+                                    <th><fmt:message key="last.name"/></th>
+                                    <th><fmt:message key="email"/></th>
+                                    <th><fmt:message key="condition"/></th>
+                                    <th><fmt:message key="role"/></th>
+                                    <th><fmt:message key="change"/></th>
                                 </tr>
                                 </thead>
 
@@ -54,13 +54,14 @@
                                 <c:forEach items="${users}" var="user">
                                     <tr>
                                         <td>${user.id}</td>
-                                        <td>${user.firstName}</td>
+                                        <td><a href="cards/${user.id}" class="search_link">${user.firstName}</a></td>
                                         <td>${user.lastName}</td>
                                         <td>${user.email}</td>
                                         <td>${user.active}</td>
                                         <td>${user.role}</td>
                                         <td>
-                                            <a href="profile?id=${user.id}" class="search_link">Edit</a>
+                                            <a href="profile?id=${user.id}" class="btn btn-primary btn-lg "
+                                               tabindex="-1" role="button" aria-disabled="true">  <fmt:message key="change"/></a>
                                         </td>
                                     </tr>
                                 </c:forEach>

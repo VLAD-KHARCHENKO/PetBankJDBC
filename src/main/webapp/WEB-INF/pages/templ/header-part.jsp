@@ -37,32 +37,28 @@
             <li class="nav-item">
                 <a class="nav-link" href="cards">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Cards</span></a>
+                    <span><fmt:message key="cards"/></span></a>
 
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="statements">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Statements</span></a>
-            </li>
+
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="payments">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Payments</span></a>
+                    <span><fmt:message key="payments"/></span></a>
             </li>
         </c:when>
         <c:when test="${user.role=='ADMIN'}">
             <li class="nav-item">
                 <a class="nav-link" href="users">
                     <i class="fas fa-users"></i>
-                    <span>Users</span></a>
+                    <span><fmt:message key="users"/></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="accounts">
+                <a class="nav-link" href="pending-cards">
                     <i class="fas fa-money-bill-wave"></i>
-                    <span>Accounts</span></a>
+                    <span><fmt:message key="pending.cards"/></span></a>
             </li>
         </c:when>
         <c:otherwise>

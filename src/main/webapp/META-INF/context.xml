@@ -12,6 +12,6 @@
             driverClassName="com.mysql.cj.jdbc.Driver"
             url="jdbc:mysql://localhost:3306/petbank?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=UTF-8"
             username="root"
-            password="H@r4e#k0"
+            password="Flvsyd[sl2"
     />
 </Context>

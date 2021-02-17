@@ -71,6 +71,11 @@ public class CardService {
         return cardDao.getById(id);
     }
 
+
+    public List<Card> getPendingCard() {
+        return cardDao.getPendingCards();
+    }
+
     /**
      * Gets User by Login from DB
      *
