@@ -54,7 +54,7 @@
                                 <c:forEach items="${users}" var="user">
                                     <tr>
                                         <td>${user.id}</td>
-                                        <td><a href="cards/${user.id}" class="search_link">${user.firstName}</a></td>
+                                        <td><a href="cards?userId=${user.id}" class="search_link">${user.firstName}</a></td>
                                         <td>${user.lastName}</td>
                                         <td>${user.email}</td>
                                         <td>${user.active}</td>

@@ -1,12 +1,14 @@
 package com.project.petbank.service;
 
 
+import com.project.petbank.model.Account;
 import com.project.petbank.model.Card;
 import com.project.petbank.model.User;
+import com.project.petbank.model.enums.CardCondition;
 import com.project.petbank.model.enums.CardName;
-import com.project.petbank.model.enums.Role;
+import com.project.petbank.repository.impl.AccountDaoImpl;
 import com.project.petbank.repository.impl.CardDaoImpl;
-import com.project.petbank.utils.PasswordsUtil;
+import com.project.petbank.repository.impl.UserDaoImpl;
 import com.project.petbank.view.CardDTO;
 import org.apache.log4j.Logger;
 
@@ -18,9 +20,13 @@ public class CardService {
 
     private static final Logger LOG = Logger.getLogger(CardService.class);
     private CardDaoImpl cardDao;
+    private AccountDaoImpl accountDao;
+    private UserDaoImpl userDao;
 
-    public CardService(CardDaoImpl cardDao) {
+    public CardService(CardDaoImpl cardDao, AccountDaoImpl accountDao, UserDaoImpl userDao) {
         this.cardDao = cardDao;
+        this.accountDao = accountDao;
+        this.userDao = userDao;
     }
 
     /**
@@ -72,8 +78,10 @@ public class CardService {
     }
 
 
-    public List<Card> getPendingCard() {
-        return cardDao.getPendingCards();
+    public List<CardDTO> getPendingCard() {
+        LOG.info("CardService|getPendingCard()");
+        List<Card> allPending = cardDao.getPendingCards();
+        return mapToCardDTO(allPending);
     }
 
     /**
@@ -91,7 +99,7 @@ public class CardService {
         Card newCard = Card.builder()
                 .cardName(CardName.UNIVERSAL)
                 .number(number)
-                .isActive(true)
+                .cardCondition(CardCondition.ACTIVE)
                 .accountId(accountId)
                 .build();
         cardDao.create(newCard);
@@ -108,6 +116,14 @@ public class CardService {
         return mapToCardDTO(all);
     }
 
+    public List<CardDTO> getAllByUserId(Long userId) {
+        List<Account> userAccounts = accountDao.getAllByFieldId(userId);
+        List<Card> userCards = userAccounts.stream()
+                .map(account -> cardDao.getByFieldId(account.getId()))
+                .collect(Collectors.toList());
+        return mapToCardDTO(userCards);
+    }
+
     public List<CardDTO> getAllPaginated(int page, int size) {
         LOG.info("getAllPaginated:");
         List<Card> all = cardDao.getAllPaginated(page, size);
@@ -122,15 +138,33 @@ public class CardService {
      * @return
      */
     private List<CardDTO> mapToCardDTO(List<Card> all) {
-        return all.stream().map(cards -> {
-            Card cardProfile = cardDao.getById(cards.getId());
-            CardDTO cardDTO = new CardDTO(
-                    cardProfile.getId(),
-                    cardProfile.getCardName(),
-                    cardProfile.getNumber(),
-                    cardProfile.isActive() ? "Active" : "Blocked");
+        return all.stream().map(card -> {
+//            Card cardProfile = cardDao.getById(card.getId());
+            Account account = accountDao.getById(card.getAccountId());
+            User user = userDao.getById(account.getUserId());
+            return new CardDTO(
+                    card.getId(),
+                    card.getCardName(),
+                    card.getNumber(),
+                    card.getCardCondition(),
+                    user,
+                    account);
 
-            return cardDTO;
+
         }).collect(Collectors.toList());
+    }
+
+
+    public CardDTO getCardByAccountId(Long accountId) {
+       Card card = cardDao.getByFieldId(accountId);
+        Account account = accountDao.getById(accountId);
+        User user = userDao.getById(account.getUserId());
+        return new CardDTO(
+                card.getId(),
+                card.getCardName(),
+                card.getNumber(),
+                card.getCardCondition(),
+                user,
+                account);
     }
 }

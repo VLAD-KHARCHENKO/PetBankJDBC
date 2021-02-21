@@ -23,6 +23,7 @@ public class AccountDaoImpl extends AbstractDao<Account> implements GetAllDao<Ac
     private static final String COLUMN_USER_ID = "user_id";
     private static final String SELECT_ALL_ACCOUNT = "SELECT * FROM `account` ";
     private static final String SELECT_PAGINATE_ACCOUNT = "SELECT * FROM `account` LIMIT ?,?";
+
     //  private static final String SELECT_ALL_FOR_CARD = "SELECT card_name, isActive, number"+
     //   "FROM `card` JOIN `account` ON card.account_id = account.id";
 
@@ -49,7 +50,7 @@ public class AccountDaoImpl extends AbstractDao<Account> implements GetAllDao<Ac
 
     @Override
     public List<Account> getAllByFieldId(long id) {
-        return getAllByField(SELECT_ALL_ACCOUNT + "WHERE id = ?",
+        return getAllByField(SELECT_ALL_ACCOUNT + "WHERE user_id = ?",
                 ps -> ps.setLong(1, id),
                 getMapper());
     }

@@ -1,5 +1,8 @@
 package com.project.petbank.view;
 
+import com.project.petbank.model.Account;
+import com.project.petbank.model.User;
+import com.project.petbank.model.enums.CardCondition;
 import com.project.petbank.model.enums.CardName;
 
 import java.util.Objects;
@@ -8,17 +11,19 @@ public class CardDTO {
     private long id;
     private CardName cardName;
     private String number;
-    private String active;
+    private CardCondition cardCondition;
+    private User user;
+    private Account account;
 
-    public CardDTO(long id, CardName cardName, String number, String active) {
+    public CardDTO(long id, CardName cardName, String number, CardCondition cardCondition, User user, Account account) {
         this.id = id;
         this.cardName = cardName;
         this.number = number;
-        this.active = active;
+        this.cardCondition = cardCondition;
+        this.user = user;
+        this.account = account;
     }
 
-    public CardDTO() {
-    }
 
     public long getId() {
         return id;
@@ -44,12 +49,28 @@ public class CardDTO {
         this.number = number;
     }
 
-    public String getActive() {
-        return active;
+    public CardCondition getCardCondition() {
+        return cardCondition;
     }
 
-    public void setActive(String active) {
-        this.active = active;
+    public void setCardCondition(CardCondition cardCondition) {
+        this.cardCondition = cardCondition;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     @Override
@@ -58,23 +79,30 @@ public class CardDTO {
                 "id=" + id +
                 ", cardName=" + cardName +
                 ", number='" + number + '\'' +
-                ", active='" + active + '\'' +
+                ", cardCondition=" + cardCondition +
+                ", user=" + user +
+                ", account=" + account +
                 '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof CardDTO)) return false;
         CardDTO cardDTO = (CardDTO) o;
-        return id == cardDTO.id &&
-                cardName == cardDTO.cardName &&
-                Objects.equals(number, cardDTO.number) &&
-                Objects.equals(active, cardDTO.active);
+        return getId() == cardDTO.getId() &&
+                getCardName() == cardDTO.getCardName() &&
+                Objects.equals(getNumber(), cardDTO.getNumber()) &&
+                getCardCondition() == cardDTO.getCardCondition()
+                && Objects.equals(getUser(), cardDTO.getUser()) &&
+                Objects.equals(getAccount(), cardDTO.getAccount())
+                ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, cardName, number, active);
+        return Objects.hash(getId(), getCardName(), getNumber(), getCardCondition()
+                , getUser(), getAccount()
+        );
     }
 }

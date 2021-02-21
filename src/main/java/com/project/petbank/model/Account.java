@@ -7,20 +7,8 @@ public class Account {
     private long id;
     private String number;
     private BigDecimal balance;
-    private List<Card> cards;
     private boolean isActive;
     private long userId;
-
-
-
-    public Account(long id, String number, BigDecimal balance, List<Card> cards, boolean isActive, long userId) {
-        this.id = id;
-        this.number = number;
-        this.balance = balance;
-        this.cards = cards;
-        this.isActive = isActive;
-        this.userId = userId;
-    }
 
     public Account(long id, String number, BigDecimal balance, boolean isActive, long userId) {
         this.id = id;
@@ -54,14 +42,6 @@ public class Account {
         this.balance = balance;
     }
 
-    public List<Card> getCards() {
-        return cards;
-    }
-
-    public void setCards(List<Card> cards) {
-        this.cards = cards;
-    }
-
     public boolean isActive() {
         return isActive;
     }
@@ -84,7 +64,6 @@ public class Account {
                 "id=" + id +
                 ", number='" + number + '\'' +
                 ", balance=" + balance +
-                ", cards=" + cards +
                 ", isActive=" + isActive +
                 ", userId=" + userId +
                 '}';

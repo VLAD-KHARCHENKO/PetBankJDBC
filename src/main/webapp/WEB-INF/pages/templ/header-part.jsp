@@ -35,7 +35,7 @@
     <c:choose>
         <c:when test="${user.role=='CUSTOMER'}">
             <li class="nav-item">
-                <a class="nav-link" href="cards">
+                <a class="nav-link" href="cards?userId=${user.id}">
                     <i class="fas fa-fw fa-table"></i>
                     <span><fmt:message key="cards"/></span></a>
 

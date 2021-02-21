@@ -2,10 +2,10 @@ use petbank;
 
 insert into `user` (`first_name`, `last_name`,`email`, `password`, `isActive`, `role`) values
 ('Сергій', 'Адміненко','admin@g.com', '$2a$12$BzcrGYG77xPP4EtfdV1WtOCb67RtnTAvUmSPyOuB74ADsUeRsIlGW', true, 'ADMIN'),
-('Папа', 'Карло', 'user1@g.com', 'password', true, 'CUSTOMER'),
-('Буратіно','Карло', 'user2@g.com', 'password', true, 'CUSTOMER'),
-('Федір', 'Дядя', 'user3@g.com', 'password', false, 'CUSTOMER'),
-('Дженіфер', 'Лопес', 'user4@g.com', 'password', true, 'CUSTOMER');
+('Папа', 'Карло', 'user1@g.com', '$2a$12$BzcrGYG77xPP4EtfdV1WtOCb67RtnTAvUmSPyOuB74ADsUeRsIlGW', true, 'CUSTOMER'),
+('Буратіно','Карло', 'user2@g.com', '$2a$12$BzcrGYG77xPP4EtfdV1WtOCb67RtnTAvUmSPyOuB74ADsUeRsIlGW', true, 'CUSTOMER'),
+('Федір', 'Дядя', 'user3@g.com', '$2a$12$BzcrGYG77xPP4EtfdV1WtOCb67RtnTAvUmSPyOuB74ADsUeRsIlGW', false, 'CUSTOMER'),
+('Дженіфер', 'Лопес', 'user4@g.com', '$2a$12$BzcrGYG77xPP4EtfdV1WtOCb67RtnTAvUmSPyOuB74ADsUeRsIlGW', true, 'CUSTOMER');
 
 insert into `account`  (`number`, `balance`,`isActive`, `user_id`)  values
 ('UA26001', '123.76', true, 2),
@@ -19,29 +19,19 @@ insert into `account`  (`number`, `balance`,`isActive`, `user_id`)  values
 ('UA26009', '157647.56', true, 4),
 ('UA260010', '0.00', false, 5);
 
-insert into `card`  (`card_name`,`isActive`, `account_id`)  values
-('UNIVERSAL',  true, 1),
-('CREDIT',  true, 2),
-('UNIVERSAL',  true, 3),
-('CREDIT',  true, 4),
-('UNIVERSAL',  true, 5),
-('INTERNET', true, 6),
-('UNIVERSAL',  true, 7),
-('ANOTHER',  false, 8),
-('UNIVERSAL',  true, 9),
-('CREDIT',  false, 10);
+insert into `card`  (`card_name`,`number`,`card_condition`, `account_id`)  values
+('UNIVERSAL', 1234,  'ACTIVE', 1),
+('CREDIT', 1235, 'ACTIVE', 2),
+('UNIVERSAL', 1236, 'ACTIVE', 3),
+('CREDIT', 1237, 'BLOCKED', 4),
+('UNIVERSAL', 1238, 'ACTIVE', 5),
+('INTERNET', 1239, 'BLOCKED', 6),
+('UNIVERSAL', 1240, 'PENDING', 7),
+('UNIVERSAL', 1241, 'ACTIVE', 8),
+('UNIVERSAL', 1242, 'BLOCKED', 9),
+('CREDIT', 1243, 'PENDING', 10);
 
-insert into `card_list`  ( `account_id`, `card_id`)  values
-(1, 1),
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5),
-(6, 6),
-(7, 7),
-(8, 8),
-(9, 9),
-(10, 10);
+
 
 insert into `payment`  (`date`, `debit_account_id`,`credit_account_id`, `amount`, `description`, `status`)  values
 ('2019-08-20 11:00:00', 1, 2, 20.00, 'оплата за','SAVE'),

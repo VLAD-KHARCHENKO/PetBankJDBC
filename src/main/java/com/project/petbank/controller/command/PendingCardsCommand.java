@@ -22,28 +22,11 @@ public class PendingCardsCommand extends UniCommand {
     }
 
     public PendingCardsCommand() {
-
     }
 
     @Override
     protected PageResponse performGet(HttpServletRequest request) {
-//        String pageStr = request.getParameter("page");
-//        String sizeStr = request.getParameter("size");
-//        Integer size;
-//        Integer page;
-//        if (isNull(pageStr)) {
-//            page = 1;
-//        } else {
-//            page = Integer.parseInt(pageStr);
-//        }
-//        if (isNull(sizeStr)) {
-//            size = 30;
-//        } else {
-//            size = Integer.parseInt(sizeStr);
-//        }
-//        LOG.info("page="+page+" size="+size);
-
-
+        LOG.info("PendingCardsCommand");
        request.setAttribute("pendingCards", cardService.getPendingCard());
         LOG.info("Set pendingCards");
 

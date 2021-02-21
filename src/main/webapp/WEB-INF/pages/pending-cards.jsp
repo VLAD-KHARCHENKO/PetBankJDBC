@@ -62,6 +62,8 @@
                             <tr>
                                 <td>${pendingCard.id}</td>
                                 <td>${pendingCard.number}</td>
+                                <td>${pendingCard.user.firstName}</td>
+                                <td>${pendingCard.user.lastName}</td>
 
                                 <td>
                                     <c:url var="activatedUrl" value="/pending-cards/activated"/>

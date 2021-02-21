@@ -16,16 +16,16 @@ import static java.util.Objects.isNull;
 public class CardsCommand extends UniCommand {
     private CardService cardService;
     private static final Logger LOG = Logger.getLogger(CardsCommand.class);
+    public static final String ID = "userId";
 
     public CardsCommand(CardService cardService) {
         this.cardService = cardService;
     }
 
-    public CardsCommand() {
-    }
 
     @Override
     protected PageResponse performGet(HttpServletRequest request) {
+       Long userId = Long.parseLong(request.getParameter(ID)) ;
 //        String pageStr = request.getParameter("page");
 //        String sizeStr = request.getParameter("size");
 //        Integer size;
@@ -41,7 +41,7 @@ public class CardsCommand extends UniCommand {
 //            size = Integer.parseInt(sizeStr);
 //        }
        // LOG.info("page="+page+" size="+size);
-        request.setAttribute("cards", cardService.getAll());
+        request.setAttribute("cards", cardService.getAllByUserId(userId));
         LOG.info("Set cards");
 
         return new PageResponse(CARDS_PAGE);

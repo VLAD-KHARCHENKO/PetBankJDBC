@@ -1,6 +1,7 @@
 package com.project.petbank.service;
 
 
+import com.project.petbank.model.Payment;
 import com.project.petbank.repository.DaoFactory;
 
 public class ServiceFactory {
@@ -13,9 +14,17 @@ public class ServiceFactory {
             DaoFactory.getUserDao()
     );
     private static CardService cardService = new CardService(
-            DaoFactory.getCardDao()
+            DaoFactory.getCardDao(),
+            DaoFactory.getAccountDao(),
+            DaoFactory.getUserDao()
     );
     private static AccountService accountService = new AccountService(
+            DaoFactory.getAccountDao()
+    );
+
+    private static PaymentService paymentService = new PaymentService(
+            DaoFactory.getCardDao(),
+            DaoFactory.getPaymentDao(),
             DaoFactory.getAccountDao()
     );
 //    private static DishService dishService = new DishService(
@@ -40,6 +49,7 @@ public class ServiceFactory {
     public static AccountService getAccountService() {
         return accountService;
     }
+    public static PaymentService getPaymentService(){return paymentService;}
 
 //    public static DishService getDishService() {
 //        return dishService;

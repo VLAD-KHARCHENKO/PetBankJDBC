@@ -25,7 +25,8 @@ foreign key (user_id) references user(id)
 create table card(
 id bigint auto_increment,
 card_name enum("UNIVERSAL", "CREDIT", "INTERNET", "ANOTHER"),
-isActive boolean,
+number varchar(255),
+card_condition enum("ACTIVE", "BLOCKED", "PENDING"),
 account_id bigint,
 primary key (id),
 foreign key (account_id) references account(id)

@@ -4,6 +4,7 @@ package com.project.petbank.repository.impl;
 import com.project.petbank.config.ConnectionFactory;
 import com.project.petbank.model.Card;
 import com.project.petbank.model.User;
+import com.project.petbank.model.enums.CardCondition;
 import com.project.petbank.model.enums.CardName;
 import com.project.petbank.repository.AbstractDao;
 import com.project.petbank.repository.EntityMapper;
@@ -22,11 +23,12 @@ public class CardDaoImpl extends AbstractDao<Card> implements GetAllDao<Card> {
 
     private static final String COLUMN_СARD_NAME = "card_name";
     private static final String COLUMN_NUMBER = "number";
-    private static final String COLUMN_IS_ACTIVE = "isActive";
+    private static final String COLUMN_IS_ACTIVE = "card_condition";
     private static final String COLUMN_ACCOUNT_ID = "account_id";
     private static final String SELECT_ALL_CARDS = "SELECT * FROM `card` ";
     private static final String SELECT_ALL_CARDS_PAGINATED = "SELECT * FROM `card` LIMIT ?,?";
-    private static final String SELECT_PENDING_CARDS = "SELECT * FROM `card` WHERE isActive = 'true'";
+    private static final String SELECT_PENDING_CARDS = "SELECT * FROM `card` WHERE card_condition = 'PENDING'";
+    private static final String SELECT_ACCOUNT_FROM_CARD_ID = "SELECT * FROM `card` WHERE condition = 'PENDING'";
     //  private static final String SELECT_ALL_FOR_CARD = "SELECT card_name, isActive, number"+
     //   "FROM `card` JOIN `account` ON card.account_id = account.id";
 
@@ -54,6 +56,7 @@ public class CardDaoImpl extends AbstractDao<Card> implements GetAllDao<Card> {
 
 
     public List<Card> getPendingCards() {
+        LOG.info("CardDaoImpl|getPendingCards()");
         return getAll(SELECT_PENDING_CARDS, getMapper());
     }
 
@@ -82,6 +85,11 @@ public class CardDaoImpl extends AbstractDao<Card> implements GetAllDao<Card> {
                 },
                 getMapper());
     }
+    public Card getByFieldId(long id) {
+        return getByField(SELECT_ALL_CARDS + "WHERE account_id = ?",
+                ps -> ps.setLong(1, id),
+                getMapper());
+    }
 
     @Override
     public Card getById(long id) {
@@ -103,7 +111,7 @@ public class CardDaoImpl extends AbstractDao<Card> implements GetAllDao<Card> {
         long id = super.create(INSERT_INTO_CARD, ps -> {
             ps.setString(1, entity.getCardName().toString());
             ps.setString(2, entity.getNumber());
-            ps.setBoolean(3, entity.isActive());
+            ps.setString(3, entity.getCardCondition().toString());
             ps.setLong(4, entity.getAccountId());
         });
         entity.setId(id);
@@ -116,7 +124,7 @@ public class CardDaoImpl extends AbstractDao<Card> implements GetAllDao<Card> {
         return update(UPDATE_CARD, ps -> {
             ps.setString(1, entity.getCardName().toString());
             ps.setString(2, entity.getNumber());
-            ps.setBoolean(3, entity.isActive());
+            ps.setString(3, entity.getCardCondition().toString());
             ps.setLong(4, entity.getAccountId());
             ps.setLong(6, entity.getId());
         });
@@ -132,7 +140,7 @@ public class CardDaoImpl extends AbstractDao<Card> implements GetAllDao<Card> {
         return resultSet -> new Card(resultSet.getLong(COLUMN_ID),
                 CardName.valueOf(resultSet.getString(COLUMN_СARD_NAME)),
                 resultSet.getString(COLUMN_NUMBER),
-                resultSet.getBoolean(COLUMN_IS_ACTIVE),
+                CardCondition.valueOf(resultSet.getString(COLUMN_IS_ACTIVE)),
                 resultSet.getLong(COLUMN_ACCOUNT_ID));
     }
 }
