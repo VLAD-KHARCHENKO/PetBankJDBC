@@ -29,8 +29,8 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
-                <!-- Page Heading -->
-                <h1 class="h3 mb-4 text-gray-800">Card Page</h1>
+                <!-- Page Heading
+                <h1 class="h3 mb-4 text-gray-800">Card Page</h1>-->
 
             </div>
             <!-- /.container-fluid -->
@@ -40,16 +40,20 @@
                         <thead>
                         <tr>
                             <th>
-                                <fmt:message key="card.name"/>
+                                 <fmt:message key="card.name"/>
+
                             </th>
                             <th>
                                 <fmt:message key="number"/>
+
                             </th>
                             <th>
-                                <fmt:message key="balance"/>
+                            <fmt:message key="balance"/>
+
                             </th>
                             <th>
-                                <fmt:message key="condition"/>
+                                 <fmt:message key="condition"/>
+
                             </th>
                             <th>
                                 <fmt:message key="change"/>
@@ -61,7 +65,8 @@
                         <tbody>
                         <c:forEach items="${cards}" var="card">
                             <tr>
-                                <td><a href="statements?accountId=${card.account.id}" class="search_link">${card.cardName}</a></td>
+                                <td><a href="statements?accountId=${card.account.id}" class="search_link">${card.cardName}</a>
+                                </td>
                                 <td>${card.number}</td>
                                 <td>${card.account.balance}</td>
                                 <td>${card.cardCondition}</td>
@@ -91,7 +96,7 @@
                                         </c:when>
 
                                         <c:when test="${card.cardCondition == 'PENDING'}">
-                                            <c:if test="${user.role=='ADMIN'}">
+                                            <if test="${user.role == 'ADMIN'}">
                                                 <c:url var="activatedUrl" value="/cards/activated"/>
                                                 <form id="${cardFormId}" action="${activatedUrl}" method="post">
                                                     <input id="cardId" name="cardId" type="hidden"
@@ -102,10 +107,12 @@
                                                         <fmt:message key="activate"/>
                                                     </button>
                                                 </form>
-                                            </c:if>
+                                            </if>
                                         </c:when>
+
+
                                         <c:when test="${card.cardCondition == 'BLOCKED'}">
-                                            <c:if test="${user.role=='CUSTOMER'}">
+                                            <if test="${user.role == 'CUSTOMER'}">
                                                 <c:url var="pendingUrl" value="/cards/pending"/>
                                                 <form id="${cardFormId}" action="${pendingUrl}" method="post">
                                                     <input id="cardId" name="cardId" type="hidden"
@@ -116,8 +123,8 @@
                                                         <fmt:message key="activating.request"/>
                                                     </button>
                                                 </form>
-                                            </c:if>
-                                            <c:if test="${user.role=='ADMIN'}">
+                                            </if>
+                                            <if test="${user.role == 'ADMIN'}">
                                                 <c:url var="activatedUrl" value="/cards/activated"/>
                                                 <form id="${cardFormId}" action="${activatedUrl}" method="post">
                                                     <input id="cardId" name="cardId" type="hidden"
@@ -128,63 +135,69 @@
                                                         <fmt:message key="activate"/>
                                                     </button>
                                                 </form>
-                                            </c:if>
+                                            </if>
                                         </c:when>
-
 
 
                                     </c:choose>
 
                                 </a>
                             </td>
-                            </tr>
+
+
+                        </tr>
                         </c:forEach>
 
 
-                        </tbody>
-                    </table>
+                    </tbody>
+                </table>
+
+
+
+                <div class="mb-4"></div>
+
 
             </div>
-            <form:form class="row g-3" modelAttribute="cardForm" action="/cards/new" method="post">
-                <div class="col-auto">
-                    <div class="input-group">
-                        <span class="input-group-text"><fmt:message key="top.up.account"/></span>
-                        <form:select path="cardName" class="form-control">
-                            <c:forEach items="${cardName}" var="value">
-                                <form:option value="${value}">${value}</form:option>
-                            </c:forEach>
-                        </form:select>
-                        <form:errors path="cardName"/>
-                    </div>
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary mb-3">
-                        <fmt:message key="card"/>
-                        <i class="fas fa-fw  fa-credit-card"></i>
-                    </button>
-                </div>
-            </form:form>
-
-
-            <form:form class="row g-3" modelAttribute="replenishmentForm" action="cards" method="post">
+            <form class="row g-3" modelAttribute="cardForm" action="/cards/new" method="post">
                 <div class="col-auto">
                     <div class="input-group">
                         <span class="input-group-text"><fmt:message key="create.new"/></span>
-                        <form:select path="cardNumber" class="form-control">
+                        <select path="cardName" class="form-control">
+                            <c:forEach items="${cardName}" var="value">
+                                <option value="${value}">${value}</option>
+                            </c:forEach>
+                        </select>
+                        <errors path="cardName"/>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary mb-3">
+                        <fmt:message key="card"/>
+                        <i class="fas fa-fw  fa-credit-card"></i>
+                    </button>
+                </div>
+            </form>
+
+
+            <form class="row g-3" modelAttribute="replenishmentForm" action="cards" method="post">
+                <div class="col-auto">
+                    <div class="input-group">
+                        <span class="input-group-text"><fmt:message key="top.up.account"/></span>
+                        <select path="cardNumber" class="form-control">
                             <c:forEach items="${activeCards}" var="activeCard">
-                                <form:option value="${activeCard.number}">${activeCard.cardName} - ${activeCard.number} -
+                                <option value="${activeCard.number}">${activeCard.cardName} - ${activeCard.number} -
                                     ${activeCard.account.balance}$
-                                </form:option>
+                                </option>
 
                             </c:forEach>
-                        </form:select>
-                        <form:errors path="cardNumber"/>
+                        </select>
+                        <errors path="cardNumber"/>
 
-                        <form:input path="amount" class="form-control"
+                        <input path="amount" class="form-control"
                                     aria-label="Dollar amount (with dot and two decimal places)"/>
                         <span class="input-group-text">$</span>
                         <span class="input-group-text">0.00</span>
-                        <form:errors path="amount"/>
+                        <errors path="amount"/>
 
                     </div>
                 </div>
@@ -194,17 +207,11 @@
                         <i class="fas fa-fw  fa-credit-card"></i>
                     </button>
                 </div>
-            </form:form>
+            </form>
         </div>
     </div>
 </div>
 
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <!-- End of Main Content -->
 </div>
 <!-- Footer -->
 <c:import url="templ/footer-part.jsp"/>

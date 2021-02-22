@@ -2,6 +2,8 @@ package com.project.petbank.controller.command;
 
 
 import com.project.petbank.controller.data.PageResponse;
+import com.project.petbank.model.Card;
+import com.project.petbank.model.enums.CardCondition;
 import com.project.petbank.service.CardService;
 import com.project.petbank.service.UserService;
 import org.apache.log4j.Logger;
@@ -26,7 +28,7 @@ public class PendingCardsCommand extends UniCommand {
 
     @Override
     protected PageResponse performGet(HttpServletRequest request) {
-        LOG.info("PendingCardsCommand");
+        LOG.info("Pending Cards Command");
        request.setAttribute("pendingCards", cardService.getPendingCard());
         LOG.info("Set pendingCards");
 
@@ -35,7 +37,11 @@ public class PendingCardsCommand extends UniCommand {
 
     @Override
     protected PageResponse performPost(HttpServletRequest request) {
+        LOG.info("Activate Cards Command");
+        Long id =Long.parseLong(request.getParameter("cardId"));
+        LOG.info("ID"+id);
+        cardService.changePendingCondition(id);
 
-        return null;
+        return new PageResponse(PENDING_PAGE,false);
     }
 }

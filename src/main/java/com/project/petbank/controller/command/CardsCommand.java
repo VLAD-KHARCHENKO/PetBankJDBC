@@ -2,6 +2,8 @@ package com.project.petbank.controller.command;
 
 
 import com.project.petbank.controller.data.PageResponse;
+import com.project.petbank.model.enums.CardCondition;
+import com.project.petbank.model.enums.CardName;
 import com.project.petbank.service.CardService;
 import com.project.petbank.service.UserService;
 import org.apache.log4j.Logger;
@@ -41,7 +43,10 @@ public class CardsCommand extends UniCommand {
 //            size = Integer.parseInt(sizeStr);
 //        }
        // LOG.info("page="+page+" size="+size);
+
         request.setAttribute("cards", cardService.getAllByUserId(userId));
+        request.setAttribute("cardName", CardName.values());
+      //  request.setAttribute("activeCards", cardService.findAllByUserIdAndCardCondition(userId));
         LOG.info("Set cards");
 
         return new PageResponse(CARDS_PAGE);

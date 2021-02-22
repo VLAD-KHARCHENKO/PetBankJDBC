@@ -3,13 +3,11 @@ package com.project.petbank.repository.impl;
 
 import com.project.petbank.config.ConnectionFactory;
 import com.project.petbank.model.Card;
-import com.project.petbank.model.User;
 import com.project.petbank.model.enums.CardCondition;
 import com.project.petbank.model.enums.CardName;
 import com.project.petbank.repository.AbstractDao;
 import com.project.petbank.repository.EntityMapper;
 import com.project.petbank.repository.GetAllDao;
-import com.project.petbank.repository.UserDao;
 import org.apache.log4j.Logger;
 
 import java.util.List;
@@ -74,6 +72,8 @@ public class CardDaoImpl extends AbstractDao<Card> implements GetAllDao<Card> {
                 getMapper());
     }
 
+
+
     @Override
     public List<Card> getAllPaginated(int page, int size) {
         LOG.debug("getAllPaginated : ");
@@ -85,8 +85,14 @@ public class CardDaoImpl extends AbstractDao<Card> implements GetAllDao<Card> {
                 },
                 getMapper());
     }
+
     public Card getByFieldId(long id) {
         return getByField(SELECT_ALL_CARDS + "WHERE account_id = ?",
+                ps -> ps.setLong(1, id),
+                getMapper());
+    }
+    public Card getActiveCardByFieldId(long id) {
+        return getByField(SELECT_ALL_CARDS + "WHERE (card_condition = 'ACTIVE' AND account_id = ?)",
                 ps -> ps.setLong(1, id),
                 getMapper());
     }
@@ -126,7 +132,7 @@ public class CardDaoImpl extends AbstractDao<Card> implements GetAllDao<Card> {
             ps.setString(2, entity.getNumber());
             ps.setString(3, entity.getCardCondition().toString());
             ps.setLong(4, entity.getAccountId());
-            ps.setLong(6, entity.getId());
+            ps.setLong(5, entity.getId());
         });
     }
 
@@ -143,4 +149,6 @@ public class CardDaoImpl extends AbstractDao<Card> implements GetAllDao<Card> {
                 CardCondition.valueOf(resultSet.getString(COLUMN_IS_ACTIVE)),
                 resultSet.getLong(COLUMN_ACCOUNT_ID));
     }
+
+
 }

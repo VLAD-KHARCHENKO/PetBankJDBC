@@ -66,9 +66,9 @@
                                 <td>${pendingCard.user.lastName}</td>
 
                                 <td>
-                                    <c:url var="activatedUrl" value="/pending-cards/activated"/>
-                                    <form id="${cardFormId}" action="${activatedUrl}" method="post">
-                                        <input id="cardId" name="cardId" type="hidden"
+
+                                    <form  action="pending-cards" method="post">
+                                        <input  name="cardId" type="hidden"
                                                value="${pendingCard.id}"/>
                                         <button class="btn btn-success" type="submit">
                                             <fmt:message key="activate"/>

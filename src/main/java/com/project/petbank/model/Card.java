@@ -14,8 +14,7 @@ public class Card {
     private CardCondition cardCondition;
     private long accountId;
 
-    public Card() {
-    }
+
 
     public Card(long id, CardName cardName, String number, CardCondition cardCondition, long accountId) {
         this.id = id;

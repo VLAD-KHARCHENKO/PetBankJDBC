@@ -139,7 +139,6 @@ public class CardService {
      */
     private List<CardDTO> mapToCardDTO(List<Card> all) {
         return all.stream().map(card -> {
-//            Card cardProfile = cardDao.getById(card.getId());
             Account account = accountDao.getById(card.getAccountId());
             User user = userDao.getById(account.getUserId());
             return new CardDTO(
@@ -156,7 +155,7 @@ public class CardService {
 
 
     public CardDTO getCardByAccountId(Long accountId) {
-       Card card = cardDao.getByFieldId(accountId);
+        Card card = cardDao.getByFieldId(accountId);
         Account account = accountDao.getById(accountId);
         User user = userDao.getById(account.getUserId());
         return new CardDTO(
@@ -167,4 +166,23 @@ public class CardService {
                 user,
                 account);
     }
+
+
+    public boolean changePendingCondition(long id) {
+        Card updatedCard = cardDao.getById(id);
+        updatedCard.setCardCondition(CardCondition.ACTIVE);
+        LOG.info("changePendingCondition");
+        return cardDao.update(updatedCard);
+
+    }
+
+//    public List<CardDTO> findAllByUserIdAndCardCondition(long id) {
+//         List<Account> accounts = accountDao.getAllByFieldId(id);
+//         LOG.info("List<Account> accounts = "+accounts);
+//         List<Card> all =accounts.stream().map(account -> cardDao.getActiveCardByFieldId(account.getId()))
+//                 .collect(Collectors.toList());
+//         LOG.info("List<Card> all = "+all);
+//        return mapToCardDTO(all);
+//
+//    }
 }

@@ -3,7 +3,9 @@ package com.project.petbank.repository;
 
 import com.project.petbank.config.ConnectionFactory;
 import com.project.petbank.model.Account;
+import com.project.petbank.model.Card;
 import com.project.petbank.model.Payment;
+import com.project.petbank.model.enums.CardCondition;
 import lombok.RequiredArgsConstructor;
 import org.apache.log4j.Logger;
 

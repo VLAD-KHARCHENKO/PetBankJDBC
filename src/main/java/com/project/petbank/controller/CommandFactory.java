@@ -118,7 +118,7 @@ public class CommandFactory {
         ));
 
         postCommandMap.put("profile", new ProfileCommand());
-        postCommandMap.put("pending-cards", new PendingCardsCommand());
+        postCommandMap.put("pending-cards", new PendingCardsCommand(ServiceFactory.getCardService()));
 
 //        postCommandMap.put("dish", new DishCommand(
 //                ServiceFactory.getDishService()
