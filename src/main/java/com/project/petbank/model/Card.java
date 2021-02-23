@@ -3,21 +3,28 @@ package com.project.petbank.model;
 
 import com.project.petbank.model.enums.CardCondition;
 import com.project.petbank.model.enums.CardName;
-import lombok.Builder;
 
-@Builder
+
+
 public class Card {
 
     private long id;
     private CardName cardName;
-    private String number;
+    private long number;
     private CardCondition cardCondition;
     private long accountId;
 
 
 
-    public Card(long id, CardName cardName, String number, CardCondition cardCondition, long accountId) {
+    public Card(long id, CardName cardName, long number, CardCondition cardCondition, long accountId) {
         this.id = id;
+        this.cardName = cardName;
+        this.number = number;
+        this.cardCondition = cardCondition;
+        this.accountId = accountId;
+    }
+
+    public Card(CardName cardName, long number, CardCondition cardCondition, long accountId) {
         this.cardName = cardName;
         this.number = number;
         this.cardCondition = cardCondition;
@@ -40,11 +47,11 @@ public class Card {
         this.cardName = cardName;
     }
 
-    public String getNumber() {
+    public long getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(long number) {
         this.number = number;
     }
 

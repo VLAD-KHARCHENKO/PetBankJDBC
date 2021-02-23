@@ -20,7 +20,7 @@ public class CommandFactory {
         getCommandMap.put("admin", new AdminCommand());
         getCommandMap.put("user", new UserCommand() {
         });
-        getCommandMap.put("payments", new PaymentCommand());
+        getCommandMap.put("payments", new PaymentCommand(ServiceFactory.getUserService(), ServiceFactory.getCardService()));
         getCommandMap.put("statements", new StatementsCommand(ServiceFactory.getUserService(), ServiceFactory.getPaymentService(), ServiceFactory.getCardService()));
         getCommandMap.put("cards", new CardsCommand(ServiceFactory.getCardService()));
         getCommandMap.put("accounts", new AccountCommand(ServiceFactory.getAccountService()));
@@ -102,7 +102,8 @@ public class CommandFactory {
 //                ServiceFactory.getOrderService()
 //        ));
         postCommandMap.put("payments", new PaymentCommand(
-                ServiceFactory.getUserService()
+                ServiceFactory.getUserService(),
+                ServiceFactory.getCardService()
         ));
         postCommandMap.put("statements", new StatementsCommand(
                 ServiceFactory.getUserService(), ServiceFactory.getPaymentService(), ServiceFactory.getCardService()

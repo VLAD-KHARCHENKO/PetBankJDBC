@@ -28,8 +28,7 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <form class="row g-3" action="payments" method="post"
-                               modelAttribute="paymentForm">
+                    <form class="row g-3" action="payments" method="post">
                         <div class="row">
 
                             <div class="col-xl-4 col-md-6 mb-4">
@@ -41,17 +40,17 @@
                                                     <fmt:message key="from.the.card"/>
                                                 </div>
 
-                                                <select path="credit" class="form-control mb-3">
+                                                <select name="cardId"  class="form-control mb-3">
 
                                                     <c:forEach items="${cards}" var="card">
-                                                        <option value="${card.number}">${card.cardName} - ${card.number} -
+                                                        <option value="${card.id}">${card.cardName} - ${card.number} -
                                                             ${card.account.balance}$
                                                         </option>
 
                                                     </c:forEach>
                                                 </select>
                                                 <div class="input-group">
-                                                    <input path="amount" class="form-control"
+                                                    <input name="amount" class="form-control"
                                                                 aria-label="Dollar amount (with dot and two decimal places)"/>
                                                     <span class="input-group-text">$</span>
                                                     <span class="input-group-text">0.00</span>
@@ -60,7 +59,7 @@
                                                 <div class="mb-3">
                                                     <label for="exampleFormControlTextarea1"
                                                            class="form-label"><fmt:message key="description"/></label>
-                                                    <textarea path="description" class="form-control" id="exampleFormControlTextarea1"
+                                                    <textarea name="description" class="form-control" id="exampleFormControlTextarea1"
                                                                    rows="3"></textarea>
 
                                                 </div>
@@ -84,7 +83,7 @@
                                                 </div>
 
                                                 <div class="input-group">
-                                                    <input path="debit" type="text" class="form-control"
+                                                    <input name="debit" type="text" class="form-control"
                                                                 aria-label="Dollar amount (with dot and two decimal places)"/>
                                                     <span class="input-group-text"> <fmt:message key="card.number"/></span>
 

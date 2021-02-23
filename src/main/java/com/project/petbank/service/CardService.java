@@ -12,7 +12,9 @@ import com.project.petbank.repository.impl.UserDaoImpl;
 import com.project.petbank.view.CardDTO;
 import org.apache.log4j.Logger;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -22,20 +24,24 @@ public class CardService {
     private CardDaoImpl cardDao;
     private AccountDaoImpl accountDao;
     private UserDaoImpl userDao;
+    private UserService userService;
 
-    public CardService(CardDaoImpl cardDao, AccountDaoImpl accountDao, UserDaoImpl userDao) {
+
+    public CardService(CardDaoImpl cardDao, AccountDaoImpl accountDao, UserDaoImpl userDao, UserService userService) {
         this.cardDao = cardDao;
         this.accountDao = accountDao;
         this.userDao = userDao;
+        this.userService = userService;
+
     }
 
-    /**
-     * Validates User's Login and checks if it corresponds with password
-     *
-     * @param login
-     * @param password
-     * @return
-     */
+/**
+ * Validates User's Login and checks if it corresponds with password
+ *
+ * @param login
+ * @param password
+ * @return
+ */
 //    public boolean validateCard(long id) {
 //        Card card = cardDao.getById(id);
 //        LOG.info("Get user by login:" + card);
@@ -95,16 +101,33 @@ public class CardService {
     }
 
 
-    public Card registrationCard(String cardName, String number, long accountId) {
-        Card newCard = Card.builder()
-                .cardName(CardName.UNIVERSAL)
-                .number(number)
-                .cardCondition(CardCondition.ACTIVE)
-                .accountId(accountId)
-                .build();
+    public Card registrationCard(CardName cardName, User user) {
+        long cardNumber = generateCardNumber();
+        LOG.info("cardNumber=" + cardNumber);
+        Account account = createAccount(user.getId(), cardNumber);
+        LOG.info("createAccount" + account);
+        Card newCard = new Card(
+                cardName, cardNumber, CardCondition.ACTIVE, account.getId());
         cardDao.create(newCard);
         return newCard;
     }
+
+    public Long generateCardNumber() {
+        Card maxNumberCard = (cardDao.findMaxValueByNumber(1L));
+        Long newNumber = maxNumberCard.getNumber();
+        LOG.info("generateCardNumber" + newNumber);
+        return ++newNumber;
+    }
+
+    public Account createAccount(long userId, long cardNumber) {
+        LOG.info("createAccount method");
+        String accountNumber = "UA2600" + cardNumber;
+        LOG.info("accountNumber:" + accountNumber);
+
+        Account newAccount = new Account(accountNumber, BigDecimal.ZERO, true, userId);
+        return accountDao.create(newAccount);
+    }
+
 
     /**
      * Gets List UserDTO from DB
@@ -168,21 +191,38 @@ public class CardService {
     }
 
 
-    public boolean changePendingCondition(long id) {
+//    public boolean changePendingConditionToActive(long id) {
+//        Card updatedCard = cardDao.getById(id);
+//        updatedCard.setCardCondition(CardCondition.ACTIVE);
+//        LOG.info("change Pending Condition To Active");
+//        return cardDao.update(updatedCard);
+//
+//    }
+
+
+    public boolean changeConditionCard(long id, CardCondition cardCondition) {
         Card updatedCard = cardDao.getById(id);
-        updatedCard.setCardCondition(CardCondition.ACTIVE);
-        LOG.info("changePendingCondition");
+        updatedCard.setCardCondition(cardCondition);
+        LOG.info("change card condition");
         return cardDao.update(updatedCard);
 
     }
 
-//    public List<CardDTO> findAllByUserIdAndCardCondition(long id) {
-//         List<Account> accounts = accountDao.getAllByFieldId(id);
-//         LOG.info("List<Account> accounts = "+accounts);
-//         List<Card> all =accounts.stream().map(account -> cardDao.getActiveCardByFieldId(account.getId()))
-//                 .collect(Collectors.toList());
-//         LOG.info("List<Card> all = "+all);
-//        return mapToCardDTO(all);
-//
-//    }
+
+    public List<CardDTO> findAllByUserIdAndCardCondition(long id) {
+        List<Account> accounts = accountDao.getAllByFieldId(id);
+        LOG.info("List<Account> accounts = " + accounts);
+        List<Card> all = accounts.stream().map(account -> cardDao.getActiveCardByFieldId(account.getId())).filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        LOG.info("List<Card> all = " + all);
+        return mapToCardDTO(all);
+
+    }
+
+    public boolean refillCard(long cardId, BigDecimal amount) {
+        Card changeCard = cardDao.getById(cardId);
+        Account account = accountDao.getById(changeCard.getAccountId());
+        account.setBalance(account.getBalance().add(amount));
+        return accountDao.update(account);
+    }
 }

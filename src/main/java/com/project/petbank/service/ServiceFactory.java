@@ -16,7 +16,9 @@ public class ServiceFactory {
     private static CardService cardService = new CardService(
             DaoFactory.getCardDao(),
             DaoFactory.getAccountDao(),
-            DaoFactory.getUserDao()
+            DaoFactory.getUserDao(),
+            ServiceFactory.getUserService()
+
     );
     private static AccountService accountService = new AccountService(
             DaoFactory.getAccountDao()

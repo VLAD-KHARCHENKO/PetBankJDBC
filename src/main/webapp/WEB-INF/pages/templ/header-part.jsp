@@ -44,7 +44,7 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="payments">
+                <a class="nav-link" href="payments?userId=${user.id}">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span><fmt:message key="payments"/></span></a>
             </li>

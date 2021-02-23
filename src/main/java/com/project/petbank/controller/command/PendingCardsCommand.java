@@ -2,17 +2,13 @@ package com.project.petbank.controller.command;
 
 
 import com.project.petbank.controller.data.PageResponse;
-import com.project.petbank.model.Card;
 import com.project.petbank.model.enums.CardCondition;
 import com.project.petbank.service.CardService;
-import com.project.petbank.service.UserService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
 import static com.project.petbank.view.PageUrlConstants.PENDING_PAGE;
-import static com.project.petbank.view.PageUrlConstants.USERS_PAGE;
-import static java.util.Objects.isNull;
 
 
 public class PendingCardsCommand extends UniCommand {
@@ -38,10 +34,13 @@ public class PendingCardsCommand extends UniCommand {
     @Override
     protected PageResponse performPost(HttpServletRequest request) {
         LOG.info("Activate Cards Command");
+
         Long id =Long.parseLong(request.getParameter("cardId"));
         LOG.info("ID"+id);
-        cardService.changePendingCondition(id);
+        cardService.changeConditionCard(id, CardCondition.ACTIVE);
 
-        return new PageResponse(PENDING_PAGE,false);
+        return new PageResponse(PENDING_PAGE,true);
     }
+
+
 }

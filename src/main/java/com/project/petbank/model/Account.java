@@ -18,6 +18,13 @@ public class Account {
         this.userId = userId;
     }
 
+    public Account(String number, BigDecimal balance, boolean isActive, long userId) {
+        this.number = number;
+        this.balance = balance;
+        this.isActive = isActive;
+        this.userId = userId;
+    }
+
     public long getId() {
         return id;
     }

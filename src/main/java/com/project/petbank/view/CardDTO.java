@@ -10,12 +10,12 @@ import java.util.Objects;
 public class CardDTO {
     private long id;
     private CardName cardName;
-    private String number;
+    private long number;
     private CardCondition cardCondition;
     private User user;
     private Account account;
 
-    public CardDTO(long id, CardName cardName, String number, CardCondition cardCondition, User user, Account account) {
+    public CardDTO(long id, CardName cardName, long number, CardCondition cardCondition, User user, Account account) {
         this.id = id;
         this.cardName = cardName;
         this.number = number;
@@ -41,11 +41,11 @@ public class CardDTO {
         this.cardName = cardName;
     }
 
-    public String getNumber() {
+    public long getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(long number) {
         this.number = number;
     }
 

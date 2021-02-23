@@ -31,10 +31,11 @@ public class AccountDaoImpl extends AbstractDao<Account> implements GetAllDao<Ac
             + COLUMN_NUMBER + ", "
             + COLUMN_BALANCE + ", "
             + COLUMN_IS_ACTIVE + ", "
-            + COLUMN_USER_ID + ") VALUE (?, ?, ?)";
+            + COLUMN_USER_ID + ") VALUE (?, ?, ?, ?)";
 
     private static final String UPDATE_ACCOUNT = "UPDATE `account` SET "
             + COLUMN_NUMBER + "= ?, "
+            + COLUMN_BALANCE + "= ?, "
             + COLUMN_IS_ACTIVE + "= ?, "
             + COLUMN_USER_ID + "= ? WHERE "
             + COLUMN_ID + " = ?";
@@ -110,6 +111,8 @@ public class AccountDaoImpl extends AbstractDao<Account> implements GetAllDao<Ac
                     ps.setBigDecimal(2, entity.getBalance());
                     ps.setBoolean(3, entity.isActive());
                     ps.setLong(4, entity.getUserId());
+                    ps.setLong(5, entity.getId());
+
                 });
     }
 
