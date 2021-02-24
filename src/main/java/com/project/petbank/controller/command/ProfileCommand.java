@@ -41,7 +41,10 @@ public class ProfileCommand extends UniCommand {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
+        LOG.debug("confirm Password:"+confirmPassword);
         boolean isActive = request.getParameter("active").equals("true");
+        LOG.debug("isActive:"+isActive);
+
         Role role = Role.valueOf(request.getParameter("role"));
 
         LOG.debug("Edit user profile firstName: " + firstName + ", lastName" + lastName +

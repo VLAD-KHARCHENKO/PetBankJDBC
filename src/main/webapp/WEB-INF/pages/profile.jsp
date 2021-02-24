@@ -73,89 +73,96 @@
                                             <c:choose>
                                                 <c:when test="${userProfile.id != user.id}">
 
-                                            <label class="form-label-outside">
-                                                <fmt:message key="condition"/>
-                                            </label>
-                                            <div class="switch-wrap d-flex justify-content-between">
-                                                <div class="confirm-radio">
+                                                    <label class="form-label-outside">
+                                                        <fmt:message key="condition"/>
+                                                    </label>
+                                                    <div class="switch-wrap d-flex justify-content-between">
+                                                        <div class="confirm-radio">
 
-                                                    <c:choose>
-                                                        <c:when test="${userProfile.active=='true'}">
-                                                    <input type="radio" id="confirm-radio"
-                                                           name="active" value="true"checked>
-                                                    <label for="confirm-radio">Active</label>
-                                                    <input type="radio" id="confirm-radio2"
-                                                           name="active" value="false">
-                                                    <label for="confirm-radio">Blocked</label>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <input type="radio" id="confirm-radio"
-                                                                   name="active" value="true">
-                                                            <label for="confirm-radio">Active</label>
-                                                            <input type="radio" id="confirm-radio2"
-                                                                   name="active" value="false"checked>
-                                                            <label for="confirm-radio">Blocked</label>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </div>
-                                            </div>
+                                                            <c:choose>
+                                                                <c:when test="${userProfile.active=='true'}">
+                                                                    <input type="radio" id="confirm-radio"
+                                                                           name="active" value="true" checked>
+                                                                    <label for="confirm-radio">Active</label>
+                                                                    <input type="radio" id="confirm-radio2"
+                                                                           name="active" value="false">
+                                                                    <label for="confirm-radio">Blocked</label>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <input type="radio" id="confirm-radio"
+                                                                           name="active" value="true">
+                                                                    <label for="confirm-radio">Active</label>
+                                                                    <input type="radio" id="confirm-radio2"
+                                                                           name="active" value="false" checked>
+                                                                    <label for="confirm-radio">Blocked</label>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </div>
+                                                    </div>
 
 
-                                            <div class="form-group">
-                                                <label for="role" class="form-label-outside">
-                                                    <fmt:message key="role"/>
-                                                </label>
-                                                <select id="role" name="role" class="form-control">
-                                                    <c:choose>
-                                                        <c:when test="${userProfile.role=='ADMIN'}">
-                                                            <option value="ADMIN">ADMIN</option>
-                                                            <option value="CUSTOMER">CUSTOMER</option>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <option value="CUSTOMER">CUSTOMER</option>
-                                                            <option value="ADMIN">ADMIN</option>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </select>
+                                                    <div class="form-group">
+                                                        <label for="role" class="form-label-outside">
+                                                            <fmt:message key="role"/>
+                                                        </label>
+                                                        <select id="role" name="role" class="form-control">
+                                                            <c:choose>
+                                                                <c:when test="${userProfile.role=='ADMIN'}">
+                                                                    <option value="ADMIN">ADMIN</option>
+                                                                    <option value="CUSTOMER">CUSTOMER</option>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <option value="CUSTOMER">CUSTOMER</option>
+                                                                    <option value="ADMIN">ADMIN</option>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </select>
 
-                                            </div>
+                                                    </div>
                                                 </c:when>
-                                                    <c:otherwise>
-                                                        <hr>
-                                                    </c:otherwise>
+                                                <c:otherwise>
+                                                   <input type="hidden" name="active" value="${userProfile.active}"/>
+                                                   <input type="hidden" name="role" value="${userProfile.role}"/>
+                                                    <hr>
+                                                </c:otherwise>
                                             </c:choose>
 
                                             <c:choose>
                                                 <c:when test="${userProfile.id == user.id}">
 
-                                            <div class="form-group row">
-                                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                                    <label for="exampleInputPassword" class="form-label-outside">
-                                                        <fmt:message key="password"/>
-                                                    </label>
-                                                    <input type="password" name="password"
-                                                           value="${userProfile.password}"
-                                                           class="form-control form-control-user"
-                                                           id="exampleInputPassword" placeholder="Password">
-                                                </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                                            <label for="exampleInputPassword"
+                                                                   class="form-label-outside">
+                                                                <fmt:message key="password"/>
+                                                            </label>
+                                                            <input type="password" name="password"
+                                                                   value="${userProfile.password}"
+                                                                   class="form-control form-control-user"
+                                                                   id="exampleInputPassword" placeholder="Password">
+                                                        </div>
 
-                                                <div class="col-sm-6">
-                                                    <label for="exampleRepeatPassword" class="form-label-outside">
-                                                        <fmt:message key="confirm.password"/>
-                                                    </label>
-                                                    <input type="password" name="confirmPassword"
-                                                           value="${userProfile.password}"
-                                                           class="form-control form-control-user"
-                                                           id="exampleRepeatPassword" placeholder="Repeat Password">
-                                                </div>
-                                            </div>
+                                                        <div class="col-sm-6">
+                                                            <label for="exampleRepeatPassword"
+                                                                   class="form-label-outside">
+                                                                <fmt:message key="confirm.password"/>
+                                                            </label>
+                                                            <input type="password" name="confirmPassword"
+                                                                   value="${userProfile.password}"
+                                                                   class="form-control form-control-user"
+                                                                   id="exampleRepeatPassword"
+                                                                   placeholder="Repeat Password">
+                                                        </div>
+                                                    </div>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <hr>
+                                                    <input type="hidden" name="password" value="${userProfile.password}"/>
+                                                    <input type="hidden" name="confirmPassword" value="${userProfile.password}"/>
                                                 </c:otherwise>
                                             </c:choose>
 
-                                                <input type="hidden" name="userId" value="${userProfile.id}"/>
+                                            <input type="hidden" name="userId" value="${userProfile.id}"/>
 
                                             <button type="submit" class="btn btn-primary btn-user btn-block">Change
                                             </button>
