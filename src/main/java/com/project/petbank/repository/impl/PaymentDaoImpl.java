@@ -4,12 +4,14 @@ package com.project.petbank.repository.impl;
 import com.project.petbank.config.ConnectionFactory;
 import com.project.petbank.model.Card;
 import com.project.petbank.model.Payment;
+import com.project.petbank.model.User;
 import com.project.petbank.model.enums.Status;
 import com.project.petbank.repository.AbstractDao;
 import com.project.petbank.repository.EntityMapper;
 import com.project.petbank.repository.GetAllDao;
 import org.apache.log4j.Logger;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,6 +30,28 @@ public class PaymentDaoImpl extends AbstractDao<Payment> implements GetAllDao<Pa
     private static final String COLUMN_STATUS = "status";
     private static final String SELECT_ALL_PAYMENTS = "SELECT * FROM `payment` ";
 
+
+    private static final String INSERT_INTO_PAYMENT = "INSERT INTO `payment` ("
+            + COLUMN_DATE + ", "
+            + COLUMN_DEBIT_ID + ", "
+            + COLUMN_CREDIT_ID + ", "
+            + COLUMN_AMOUNT + ", "
+            + COLUMN_DESCRIPTION + ", "
+            + COLUMN_STATUS + ") VALUE (?, ?, ?, ?, ?, ?)";
+
+    private static final String UPDATE_PAYMENT = "UPDATE `payment` SET "
+            + COLUMN_DATE + "= ?, "
+            + COLUMN_DEBIT_ID + "= ?, "
+            + COLUMN_CREDIT_ID + "= ?, "
+            + COLUMN_AMOUNT + "= ?, "
+            + COLUMN_DESCRIPTION +"= ?, "
+            + COLUMN_STATUS + "= ? WHERE "
+            + COLUMN_ID + " = ?";
+
+
+
+    private static final String DELETE_PAYMENT = "DELETE FROM `payment` "
+            + "WHERE " + COLUMN_ID + " = ?";
 
 
     @Override
@@ -51,7 +75,7 @@ public class PaymentDaoImpl extends AbstractDao<Payment> implements GetAllDao<Pa
     }
 
     public List<Payment> findAllSaveByAccountId(long id) {
-        return getAll(SELECT_ALL_PAYMENTS + "WHERE status = 'SAVE' and debit_account_id = ?",
+        return getAll(SELECT_ALL_PAYMENTS + "WHERE status = 'SAVE' and credit_account_id = ?",
                 ps -> {
                     ps.setLong(1, id);
                 },
@@ -60,7 +84,7 @@ public class PaymentDaoImpl extends AbstractDao<Payment> implements GetAllDao<Pa
     }
 
 
-    public List<Payment>  findAllPayedByAccountId(long id) {
+    public List<Payment> findAllPayedByAccountId(long id) {
         return getAll(SELECT_ALL_PAYMENTS + "WHERE status = 'PAID'  and (debit_account_id= ? or credit_account_id = ?)",
                 ps -> {
                     ps.setLong(1, id);
@@ -83,21 +107,46 @@ public class PaymentDaoImpl extends AbstractDao<Payment> implements GetAllDao<Pa
 
     @Override
     public Payment getById(long id) {
-        return null;
+        return getByField(SELECT_ALL_PAYMENTS + "WHERE id = ?",
+                ps -> ps.setLong(1, id),
+                getMapper());
     }
+
+
+
 
     @Override
     public Payment create(Payment entity) {
-        return null;
+        LOG.debug("Create payment: + " + entity);
+        long id = super.create(INSERT_INTO_PAYMENT, ps -> {
+            ps.setTimestamp(1, Timestamp.valueOf(entity.getDate()));
+            ps.setLong(2, entity.getDebitAccountId());
+            ps.setLong(3, entity.getCreditAccountId());
+            ps.setBigDecimal(4, entity.getAmount());
+            ps.setString(5, entity.getDescription());
+            ps.setString(6, entity.getStatus().toString());
+        });
+        entity.setId(id);
+        return entity;
     }
 
     @Override
     public boolean update(Payment entity) {
-        return false;
+        LOG.debug("Update payment: " + entity);
+        return update(UPDATE_PAYMENT, ps -> {
+            ps.setTimestamp(1, Timestamp.valueOf(entity.getDate()));
+            ps.setLong(2, entity.getDebitAccountId());
+            ps.setLong(3, entity.getCreditAccountId());
+            ps.setBigDecimal(4, entity.getAmount());
+            ps.setString(5, entity.getDescription());
+            ps.setString(6, entity.getStatus().toString());
+            ps.setLong(7, entity.getId());
+        });
     }
 
     @Override
     public boolean remove(Payment entity) {
-        return false;
+        LOG.debug("Delete payment: " + entity);
+        return remove(DELETE_PAYMENT, ps -> ps.setLong(1, entity.getId()));
     }
 }

@@ -31,7 +31,7 @@ public class StatementsCommand extends UniCommand {
 
     @Override
     protected PageResponse performGet(HttpServletRequest request) {
-        Long accountId = Long.parseLong(request.getParameter(ID)) ;
+        Long accountId = Long.parseLong(request.getParameter(ID));
         request.setAttribute("savedPayments", paymentService.getSavedPaymentByAccountNumber(accountId));
         request.setAttribute("paidPayments", paymentService.getPaidPaymentByAccountNumber(accountId));
 
@@ -41,7 +41,24 @@ public class StatementsCommand extends UniCommand {
 
     @Override
     protected PageResponse performPost(HttpServletRequest request) {
+        long paymentId = Long.parseLong(request.getParameter("payId"));
+        long cardId = Long.parseLong(request.getParameter("cardId"));
+        String command = request.getParameter("command");
+        LOG.info("command=" + command);
 
-        return null;
+        switch (command) {
+            case ("delete"):
+                paymentService.deletePayment(paymentId);
+
+                break;
+
+            case ("pay"):
+                paymentService.submitPayment(paymentId);
+
+                break;
+
+
+        }
+        return new PageResponse(STATEMENTS_PAGE + "?accountId=" + cardId, true);
     }
 }

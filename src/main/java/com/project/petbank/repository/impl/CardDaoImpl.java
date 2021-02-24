@@ -91,6 +91,13 @@ public class CardDaoImpl extends AbstractDao<Card> implements GetAllDao<Card> {
                 ps -> ps.setLong(1, id),
                 getMapper());
     }
+
+    public Card getByNumber(long number) {
+        return getByField(SELECT_ALL_CARDS + "WHERE number = ?",
+                ps -> ps.setLong(1, number),
+                getMapper());
+    }
+
     public Card getActiveCardByFieldId(long id) {
         return getByField(SELECT_ALL_CARDS + "WHERE (card_condition = 'ACTIVE' AND account_id = ?)",
                 ps -> ps.setLong(1, id),

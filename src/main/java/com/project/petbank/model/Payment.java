@@ -10,7 +10,7 @@ public class Payment {
     private long id;
     private LocalDateTime date;
     private long debitAccountId;
-    private long creditAccountSd;
+    private long creditAccountId;
     private BigDecimal amount;
     private String description;
     private Status status;
@@ -22,7 +22,16 @@ public class Payment {
         this.id = id;
         this.date = date;
         this.debitAccountId = debitAccountId;
-        this.creditAccountSd = creditAccountSd;
+        this.creditAccountId = creditAccountSd;
+        this.amount = amount;
+        this.description = description;
+        this.status = status;
+    }
+
+    public Payment(LocalDateTime date, long debitAccountId, long creditAccountId, BigDecimal amount, String description, Status status) {
+        this.date = date;
+        this.debitAccountId = debitAccountId;
+        this.creditAccountId = creditAccountId;
         this.amount = amount;
         this.description = description;
         this.status = status;
@@ -52,12 +61,12 @@ public class Payment {
         this.debitAccountId = debitAccountId;
     }
 
-    public long getCreditAccountSd() {
-        return creditAccountSd;
+    public long getCreditAccountId() {
+        return creditAccountId;
     }
 
-    public void setCreditAccountSd(long creditAccountSd) {
-        this.creditAccountSd = creditAccountSd;
+    public void setCreditAccountId(long creditAccountId) {
+        this.creditAccountId = creditAccountId;
     }
 
     public BigDecimal getAmount() {
@@ -90,7 +99,7 @@ public class Payment {
                 "id=" + id +
                 ", date=" + date +
                 ", debitAccountId=" + debitAccountId +
-                ", creditAccountSd=" + creditAccountSd +
+                ", creditAccountSd=" + creditAccountId +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
                 ", status=" + status +
@@ -104,7 +113,7 @@ public class Payment {
         Payment payment = (Payment) o;
         return getId() == payment.getId() &&
                 getDebitAccountId() == payment.getDebitAccountId() &&
-                getCreditAccountSd() == payment.getCreditAccountSd() &&
+                getCreditAccountId() == payment.getCreditAccountId() &&
                 Objects.equals(getDate(), payment.getDate()) &&
                 Objects.equals(getAmount(), payment.getAmount()) &&
                 Objects.equals(getDescription(), payment.getDescription()) &&
@@ -113,6 +122,6 @@ public class Payment {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getDate(), getDebitAccountId(), getCreditAccountSd(), getAmount(), getDescription(), getStatus());
+        return Objects.hash(getId(), getDate(), getDebitAccountId(), getCreditAccountId(), getAmount(), getDescription(), getStatus());
     }
 }

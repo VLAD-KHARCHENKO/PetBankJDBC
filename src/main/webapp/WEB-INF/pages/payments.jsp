@@ -27,6 +27,13 @@
                 <c:import url="templ/topbar-part.jsp"/>
 
                 <!-- Begin Page Content -->
+
+                <div class="range range-sm-center" > <h5>
+                    <c:if test="${not empty notification}">
+                        <c:out value ="${notification}"  />
+                    </c:if>
+                </h5></div>
+
                 <div class="container-fluid">
                     <form class="row g-3" action="payments" method="post">
                         <div class="row">
@@ -93,6 +100,8 @@
                                                 <p class="card-text">With supporting text below as a natural lead-in to
                                                     additional content.</p>
                                                 <div class="d-grid gap-2 col-6 mx-auto">
+                                                    <input id="userId" name="userId" type="hidden"
+                                                           value="${user.id}"/>
                                                     <button class="btn btn-success" type="submit"> <fmt:message key="submit"/></button>
                                                 </div>
 
