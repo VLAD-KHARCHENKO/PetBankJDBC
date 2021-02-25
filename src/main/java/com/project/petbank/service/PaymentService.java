@@ -78,6 +78,10 @@ public class PaymentService {
         return account.getBalance().compareTo(amount) >= 0;
     }
 
+    public boolean validateAmount(BigDecimal amount){
+        return amount.compareTo(BigDecimal.valueOf(0.01))>=0;
+    }
+
     public boolean validateCard(long accountId) {
         Card card = cardDao.getByFieldId(accountId);
         return card.getCardCondition().equals(CardCondition.ACTIVE);
@@ -86,9 +90,11 @@ public class PaymentService {
     public Payment registrationPayment(long creditCardId, BigDecimal amount, String description, long debitCardNumber) {
         Card card = cardDao.getByNumber(debitCardNumber);
         LOG.info("Card card =" + card);
-        if (card == null) {
+        if (card == null || !validateAmount(amount)) {
             return null;
         }
+
+
         Payment payment = new Payment(
                 LocalDateTime.now(), card.getId(), creditCardId, amount, description, Status.SAVE);
         return paymentDao.create(payment);

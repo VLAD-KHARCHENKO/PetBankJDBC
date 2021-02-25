@@ -28,7 +28,7 @@
 
                 <!-- Begin Page Content -->
 
-                <div class="range range-sm-center" > <h5>
+                <div class="range range-sm-center danger" > <h5>
                     <c:if test="${not empty notification}">
                         <c:out value ="${notification}"  />
                     </c:if>

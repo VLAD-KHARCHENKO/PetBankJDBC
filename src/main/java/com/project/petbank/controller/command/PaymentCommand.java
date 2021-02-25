@@ -60,7 +60,7 @@ public class PaymentCommand extends UniCommand {
         if (payment == null) {
             long userId = Long.parseLong(request.getParameter("userId"));
             LOG.info("long userId = "+userId );
-            request.setAttribute("notification", "Recipients card not found");
+            request.setAttribute("notification", "Recipients card not found or invalid amount");
             request.setAttribute("cards", cardService.findAllByUserIdAndCardCondition(userId));
             LOG.info("notification : " );
             return new  PageResponse(PAYMENTS_PAGE);

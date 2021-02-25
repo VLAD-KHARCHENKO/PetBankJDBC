@@ -8,11 +8,12 @@ import com.project.petbank.model.enums.Status;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class PaymentDTO {
     private long id;
-    private LocalDateTime date;
+    private String date;
     private Account debit;
     private Account credit;
     private BigDecimal amount;
@@ -21,7 +22,7 @@ public class PaymentDTO {
 
     public PaymentDTO(long id, LocalDateTime date, Account debit, Account credit, BigDecimal amount, String description, Status status) {
         this.id = id;
-        this.date = date;
+        this.date = date.format(DateTimeFormatter.ofPattern("dd.MM.HH:mm"));
         this.debit = debit;
         this.credit = credit;
         this.amount = amount;
@@ -40,11 +41,11 @@ public class PaymentDTO {
         this.id = id;
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
