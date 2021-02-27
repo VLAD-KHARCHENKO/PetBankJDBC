@@ -29,6 +29,8 @@ public class PaymentDaoImpl extends AbstractDao<Payment> implements GetAllDao<Pa
     private static final String COLUMN_DESCRIPTION = "description";
     private static final String COLUMN_STATUS = "status";
     private static final String SELECT_ALL_PAYMENTS = "SELECT * FROM `payment` ";
+    private static final String SELECT_ALL_PAYMENTS_PAGINATED = "SELECT * FROM `payment` WHERE status = 'PAID'  and (debit_account_id= ? or credit_account_id = ?) ORDER BY  %s %s LIMIT ?, ? ";
+
 
 
     private static final String INSERT_INTO_PAYMENT = "INSERT INTO `payment` ("
@@ -70,8 +72,23 @@ public class PaymentDaoImpl extends AbstractDao<Payment> implements GetAllDao<Pa
     }
 
     @Override
-    public List<Payment> getAllPaginated(int page, int size) {
+    public List<Payment> getAllPaginated(int page, int size, String sort, String direction) {
         return null;
+    }
+
+    @Override
+    public List<Payment> getAllPaginated(long accountId, int page, int size, String sort,String direction) {
+        LOG.debug("getAllPaginated String sort: "+sort);
+        String strSQLQuery=String.format(SELECT_ALL_PAYMENTS_PAGINATED,sort,direction);
+        int limit = (page) * size;
+        return getAll(strSQLQuery,
+                ps -> {
+                    ps.setLong(1, accountId);
+                    ps.setLong(2, accountId);
+                    ps.setInt(3, limit);
+                    ps.setInt(4, size);
+                },
+                getMapper());
     }
 
     public List<Payment> findAllSaveByAccountId(long id) {
@@ -84,7 +101,7 @@ public class PaymentDaoImpl extends AbstractDao<Payment> implements GetAllDao<Pa
     }
 
 
-    public List<Payment> findAllPayedByAccountId(long id) {
+    public List<Payment> findAllPaidByAccountId(long id) {
         return getAll(SELECT_ALL_PAYMENTS + "WHERE status = 'PAID'  and (debit_account_id= ? or credit_account_id = ?)",
                 ps -> {
                     ps.setLong(1, id);

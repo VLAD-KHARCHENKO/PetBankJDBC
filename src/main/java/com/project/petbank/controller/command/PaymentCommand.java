@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 
 import static com.project.petbank.view.PageUrlConstants.PAYMENTS_PAGE;
 import static com.project.petbank.view.PageUrlConstants.STATEMENTS_PAGE;
+import static java.util.Objects.isNull;
 
 
 public class PaymentCommand extends UniCommand {
@@ -38,6 +39,8 @@ public class PaymentCommand extends UniCommand {
     protected PageResponse performGet(HttpServletRequest request) {
         long userId = Long.parseLong(request.getParameter(ID));
         LOG.info("userId =" + userId);
+
+
         request.setAttribute("cards", cardService.findAllByUserIdAndCardCondition(userId));
         return new PageResponse(PAYMENTS_PAGE);
     }
@@ -66,7 +69,8 @@ public class PaymentCommand extends UniCommand {
             return new  PageResponse(PAYMENTS_PAGE);
         }
 
-        return new PageResponse(STATEMENTS_PAGE + "?accountId=" + creditCardId, true);
+
+        return new PageResponse(STATEMENTS_PAGE + "?accountId=" + creditCardId+"&page=0&size=3&sort=id", true);
 
     }
 }

@@ -1,6 +1,5 @@
 package com.project.petbank.view;
 
-import com.project.petbank.model.enums.CardName;
 
 import java.math.BigDecimal;
 import java.util.Objects;

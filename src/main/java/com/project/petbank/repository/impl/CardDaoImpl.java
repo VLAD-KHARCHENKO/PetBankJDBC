@@ -27,8 +27,7 @@ public class CardDaoImpl extends AbstractDao<Card> implements GetAllDao<Card> {
     private static final String SELECT_ALL_CARDS_PAGINATED = "SELECT * FROM `card` LIMIT ?,?";
     private static final String SELECT_PENDING_CARDS = "SELECT * FROM `card` WHERE card_condition = 'PENDING'";
     private static final String SELECT_NUMBER_CARD = "SELECT * FROM `card` WHERE number =(SELECT MAX(number) FROM `card`) and id>?";
-    //  private static final String SELECT_ALL_FOR_CARD = "SELECT card_name, isActive, number"+
-    //   "FROM `card` JOIN `account` ON card.account_id = account.id";
+
 
     private static final String INSERT_INTO_CARD = "INSERT INTO `card` ("
             + COLUMN_СARD_NAME + ", "
@@ -75,7 +74,7 @@ public class CardDaoImpl extends AbstractDao<Card> implements GetAllDao<Card> {
 
 
     @Override
-    public List<Card> getAllPaginated(int page, int size) {
+    public List<Card> getAllPaginated( int page, int size, String sort,String direction) {
         LOG.debug("getAllPaginated : ");
         int limit = (page - 1) * size;
         return getAll(SELECT_ALL_CARDS_PAGINATED,
@@ -84,6 +83,11 @@ public class CardDaoImpl extends AbstractDao<Card> implements GetAllDao<Card> {
                     ps.setInt(2, size);
                 },
                 getMapper());
+    }
+
+    @Override
+    public List<Card> getAllPaginated(long accountId, int page, int size, String sort, String direction) {
+        return null;
     }
 
     public Card getByFieldId(long id) {

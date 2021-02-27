@@ -1,6 +1,7 @@
 package com.project.petbank.service;
 
 
+import com.project.petbank.config.transaction.TransactionHandler;
 import com.project.petbank.model.Account;
 import com.project.petbank.model.Card;
 import com.project.petbank.model.Payment;
@@ -24,11 +25,13 @@ public class PaymentService {
     private CardDaoImpl cardDao;
     private PaymentDaoImpl paymentDao;
     private AccountDaoImpl accountDao;
+    private TransactionHandler transactionHandler;
 
-    public PaymentService(CardDaoImpl cardDao, PaymentDaoImpl paymentDao, AccountDaoImpl accountDao) {
+    public PaymentService(CardDaoImpl cardDao, PaymentDaoImpl paymentDao, AccountDaoImpl accountDao, TransactionHandler transactionHandler) {
         this.cardDao = cardDao;
         this.paymentDao = paymentDao;
         this.accountDao = accountDao;
+        this.transactionHandler = transactionHandler;
     }
 
     public Payment getPayment(long id) {
@@ -41,7 +44,13 @@ public class PaymentService {
     }
 
     public List<PaymentDTO> getPaidPaymentByAccountNumber(Long accountId) {
-        return mapToPaymentDTO(paymentDao.findAllPayedByAccountId(accountId));
+        return mapToPaymentDTO(paymentDao.findAllPaidByAccountId(accountId));
+    }
+
+
+    public List<PaymentDTO> getAll() {
+        List<Payment> all = paymentDao.getAll();
+        return mapToPaymentDTO(all);
     }
 
 
@@ -53,14 +62,25 @@ public class PaymentService {
                 validateCard(payment.getDebitAccountId()))) {
             return null;
         }
-
+        transactionHandler.runInTransaction(() -> {
         payment.setDate(LocalDateTime.now());
         changeBalance(payment.getCreditAccountId(), payment.getAmount().negate());
         changeBalance(payment.getDebitAccountId(), payment.getAmount());
         payment.setStatus(Status.PAID);
         paymentDao.update(payment);
+        });
         return payment;
     }
+
+
+    public List<PaymentDTO> getAllPaginated(long accountId, int page, int size, String sort, String currentDirection) {
+        LOG.info("getAllPaginated:");
+        String direction = currentDirection.equals("asc") ? "ASC" : "DESC";
+        List<Payment> all = paymentDao.getAllPaginated(accountId, page, size, sort, direction);
+        LOG.info("Get all Payment:" + all);
+        return mapToPaymentDTO(all);
+    }
+
 
     public void deletePayment(long id) {
         Payment deletePayment = getPayment(id);

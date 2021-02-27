@@ -172,10 +172,10 @@
                                     <thead>
                                     <tr>
                                         <th>
-                                            <a href="statements/${card.id}?page=${currentPage}&size=3&sort=id${direction}"
+                                            <a href="statements?accountId=${card.id}&page=${currentPage}&size=3&sort=id&direction=${direction}"
                                                class="search_link">ID</a></th>
                                         <th>
-                                            <a href="statements/${card.id}?page=${currentPage}&size=3&sort=date${direction}"
+                                            <a href="statements?accountId=${card.id}&page=${currentPage}&size=3&sort=date&direction=${direction}"
                                                class="search_link">
                                                 <fmt:message key="date"/>
                                             </a>
@@ -235,8 +235,8 @@
                                         <c:choose>
                                             <c:when test="${currentPage  != 0 }">
                                                 <li class="page-item"><a
-                                                        href="statements/${card.id}?page=${currentPage-1}&size=3&sort=${sort}${currentDirection}"><span
-                                                        class="page-link">Prev</span></a></li>
+                                                        href="statements?accountId=${card.id}&page=${currentPage-1}&size=3&sort=${sort}&direction=${currentDirection}"><span
+                                                        class="page-link"><fmt:message key="prev"/></span></a></li>
                                             </c:when>
                                             <c:otherwise>
                                                 <li class="page-item disabled"><span class="page-link"><spring:message
@@ -247,12 +247,12 @@
                                             <c:choose>
                                                 <c:when test="${currentPage == (numberPage-1) }">
                                                     <li class="page-item active"><a
-                                                            href="statements/${card.id}?page=${numberPage-1}&size=3&sort=${sort}${currentDirection}"
+                                                            href="statements?accountId=${card.id}&page=${numberPage-1}&size=3&sort=${sort}&direction=${currentDirection}"
                                                             class="page-link">${numberPage}</a></li>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <li class="page-item"><a
-                                                            href="statements/${card.id}?page=${numberPage-1}&size=3&sort=${sort}${currentDirection}"
+                                                            href="statements?accountId=${card.id}&page=${numberPage-1}&size=3&sort=${sort}&direction=${currentDirection}"
                                                             class="page-link">${numberPage}</a></li>
                                                 </c:otherwise>
                                             </c:choose>
@@ -260,7 +260,7 @@
                                         <c:choose>
                                             <c:when test="${currentPage < (paidPaymentsPages-1) }">
                                                 <li class="page-item"><a
-                                                        href="statements/${card.id}?page=${currentPage+1}&size=3&sort=${sort}${currentDirection}"><span
+                                                        href="statements?accountId=${card.id}&page=${currentPage+1}&size=3&sort=${sort}&direction=${currentDirection}"><span
                                                         class="page-link"><fmt:message key="next"/></span></a></li>
                                             </c:when>
                                             <c:otherwise>

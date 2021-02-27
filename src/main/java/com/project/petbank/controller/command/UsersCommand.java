@@ -28,21 +28,31 @@ public class UsersCommand extends UniCommand {
     protected PageResponse performGet(HttpServletRequest request) {
         String pageStr = request.getParameter("page");
         String sizeStr = request.getParameter("size");
-        Integer size;
-        Integer page;
+        String sort = request.getParameter("sort");
+        String currentDirection = request.getParameter("direction");
+        if(currentDirection==null) {
+            currentDirection = "asc";
+        }
+        int size;
+        int page;
         if (isNull(pageStr)) {
-            page = 1;
+            page = 0;
         } else {
             page = Integer.parseInt(pageStr);
         }
         if (isNull(sizeStr)) {
-            size = 30;
+            size = 3;
         } else {
             size = Integer.parseInt(sizeStr);
         }
-        LOG.info("page="+page+" size="+size);
-        request.setAttribute("users", userService.getAllPaginated(page, size));
+        LOG.info("page="+page+" size="+size + "sort= " +sort+ "currentDirection"+ currentDirection);
+        request.setAttribute("users", userService.getAllPaginated(page, size, sort, currentDirection));
         LOG.info("Set users");
+        request.setAttribute("currentPage", page);
+        request.setAttribute("usersPages", (userService.getAll().size() / size));
+        request.setAttribute("currentDirection",currentDirection);
+        request.setAttribute("direction", currentDirection.equals("asc") ?"desc":"asc");
+        request.setAttribute("sort", sort);
 
         return new PageResponse(USERS_PAGE);
     }

@@ -51,7 +51,7 @@
         </c:when>
         <c:when test="${user.role=='ADMIN'}">
             <li class="nav-item">
-                <a class="nav-link" href="users">
+                <a class="nav-link" href="users?page=0&size=3&sort=id">
                     <i class="fas fa-users"></i>
                     <span><fmt:message key="users"/></span></a>
             </li>

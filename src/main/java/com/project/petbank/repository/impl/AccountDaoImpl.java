@@ -24,8 +24,7 @@ public class AccountDaoImpl extends AbstractDao<Account> implements GetAllDao<Ac
     private static final String SELECT_ALL_ACCOUNT = "SELECT * FROM `account` ";
     private static final String SELECT_PAGINATE_ACCOUNT = "SELECT * FROM `account` LIMIT ?,?";
 
-    //  private static final String SELECT_ALL_FOR_CARD = "SELECT card_name, isActive, number"+
-    //   "FROM `card` JOIN `account` ON card.account_id = account.id";
+
 
     private static final String INSERT_INTO_ACCOUNT = "INSERT INTO `account` ("
             + COLUMN_NUMBER + ", "
@@ -64,7 +63,7 @@ public class AccountDaoImpl extends AbstractDao<Account> implements GetAllDao<Ac
     }
 
     @Override
-    public List<Account> getAllPaginated(int page, int size) {
+    public List<Account> getAllPaginated(int page, int size, String sort,String direction) {
         LOG.debug("getAllPaginated : ");
         int limit = (page - 1) * size;
         return getAll(SELECT_PAGINATE_ACCOUNT,
@@ -73,6 +72,11 @@ public class AccountDaoImpl extends AbstractDao<Account> implements GetAllDao<Ac
                     ps.setInt(2, size);
                 },
                 getMapper());
+    }
+
+    @Override
+    public List<Account> getAllPaginated(long accountId, int page, int size, String sort, String direction) {
+        return null;
     }
 
     @Override

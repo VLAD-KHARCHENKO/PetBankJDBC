@@ -39,9 +39,9 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th><fmt:message key="first.name"/></th>
-                                    <th><fmt:message key="last.name"/></th>
-                                    <th><fmt:message key="email"/></th>
+                                    <th><a href="users?page=${currentPage}&size=3&sort=first_name&direction=${direction}" class="search_link"><fmt:message key="first.name"/></a></th>
+                                    <th><a href="users?page=${currentPage}&size=3&sort=last_name&direction=${direction}" class="search_link"><fmt:message key="last.name"/></a></th>
+                                    <th><a href="users?page=${currentPage}&size=3&sort=email&direction=${direction}" class="search_link"><fmt:message key="email"/></a></th>
                                     <th><fmt:message key="condition"/></th>
                                     <th><fmt:message key="role"/></th>
                                     <th><fmt:message key="change"/></th>
@@ -67,6 +67,41 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        <!-- Pagination-->
+                        <nav aria-label="Page navigation example">
+                            <c:if test="${usersPages > 1}">
+                                <ul class="pagination">
+                                    <c:choose>
+                                        <c:when test="${currentPage  != 0 }">
+                                            <li class="page-item"><a href="users?page=${currentPage-1}&size=3&sort=${sort}&direction=${currentDirection}"><span class="page-link"><fmt:message key="prev"/></span></a></li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li class="page-item disabled"><span class="page-link"><fmt:message key="prev"/></span></li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <c:forEach var = "numberPage" begin = "1" end = "${usersPages}">
+                                        <c:choose>
+                                            <c:when test="${currentPage == (numberPage-1) }">
+                                                <li class="page-item active"><a href="users?page=${numberPage-1}&size=3&sort=${sort}&direction=${currentDirection}" class="page-link">${numberPage}</a></li>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <li class="page-item"><a href="users?page=${numberPage-1}&size=3&sort=${sort}&direction=${currentDirection}" class="page-link">${numberPage}</a></li>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+                                    <c:choose>
+                                        <c:when test="${currentPage < (usersPages-1) }">
+                                            <li class="page-item"><a href="users?page=${currentPage+1}&size=3&sort=${sort}&direction=${currentDirection}"><span class="page-link"><fmt:message key="next"/></span></a></li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li class="page-item disabled"><span class="page-link"><fmt:message key="next"/></span></li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </ul>
+                            </c:if>
+                        </nav>
+
                     </div>
                 </div>
             </div>

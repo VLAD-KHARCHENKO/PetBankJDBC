@@ -68,6 +68,17 @@ public class UserService {
     }
 
     /**
+     * Validates whether User is active
+     *
+     * @param login
+     * @return
+     */
+    public boolean validateUserActive(String login) {
+        User user = userDao.getByLogin(login);
+        return user.isActive();
+    }
+
+    /**
      * Gets User by ID from DB
      *
      * @param id
@@ -112,9 +123,10 @@ public class UserService {
         return mapToUserDTO(all);
     }
 
-    public List<UserDTO> getAllPaginated(int page, int size) {
+    public List<UserDTO> getAllPaginated(int page, int size, String sort, String currentDirection) {
         LOG.info("getAllPaginated:");
-        List<User> all = userDao.getAllPaginated(page, size);
+        String direction = currentDirection.equals("asc") ? "ASC" : "DESC";
+        List<User> all = userDao.getAllPaginated(page, size, sort, direction);
         LOG.info("Get all users:" + all);
         return mapToUserDTO(all);
     }

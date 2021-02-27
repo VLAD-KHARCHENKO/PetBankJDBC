@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="en">
 
 <head>
@@ -24,6 +27,10 @@
 
 <body class="bg-gradient-primary">
 
+<div class="range range-sm-center">
+
+</div>
+
     <div class="container">
 
         <!-- Outer Row -->
@@ -39,7 +46,16 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+
+
+
+
+
+
+                                        <h1 class="h4 text-gray-900 mb-4">Login!</h1>
+                                        <c:if test="${not empty notification}">
+                                            <div class ="text-danger"><c:out value ="${notification}" /></div>
+                                        </c:if>
                                     </div>
                                     <form class="user" action="login" method="post">
                                         <div class="form-group">
@@ -52,9 +68,7 @@
                                                 id="exampleInputPassword" placeholder="Password">
                                         </div>
 
-                                        <c:if test="${not empty notification}">
-                                            <c:out value ="${notification}" />
-                                        </c:if>
+
 
                                         <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
 

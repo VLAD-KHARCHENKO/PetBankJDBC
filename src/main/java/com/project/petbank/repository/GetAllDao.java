@@ -10,5 +10,6 @@ public interface GetAllDao<T> {
 
     List<T> getAllByField(String field);
 
-    List<T> getAllPaginated(int page, int size);
+    List<T> getAllPaginated(int page, int size, String sort,String direction);
+    List<T> getAllPaginated(long accountId, int page, int size, String sort,String direction);
 }

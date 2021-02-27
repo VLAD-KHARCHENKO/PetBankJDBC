@@ -35,46 +35,8 @@ public class CardService {
 
     }
 
-/**
- * Validates User's Login and checks if it corresponds with password
- *
- * @param login
- * @param password
- * @return
- */
-//    public boolean validateCard(long id) {
-//        Card card = cardDao.getById(id);
-//        LOG.info("Get user by login:" + card);
-//        if (card != null && PasswordsUtil.verifyHash(password, card.getPassword())) {
-//            return true;
-//        }
-//        return false;
-//    }
-
     /**
-     * Validates if Login exists in DB
-     *
-     * @param login
-     * @return
-     */
-//    public boolean validateLogin(String login) {
-//        return !userDao.isUserExists(login);
-//    }
-
-    /**
-     * Validates whether confirmPasswords corresponds with Password
-     *
-     * @param password
-     * @param confirmPassword
-     * @return
-     */
-//    public boolean validatePassword(String password, String confirmPassword) {
-//        if (password.equals(confirmPassword)) return true;
-//        return false;
-//    }
-
-    /**
-     * Gets User by ID from DB
+     * Gets Card by ID from DB
      *
      * @param id
      * @return
@@ -91,7 +53,7 @@ public class CardService {
     }
 
     /**
-     * Gets User by Login from DB
+     * Gets Card by Number from DB
      *
      * @param
      * @return
@@ -130,7 +92,7 @@ public class CardService {
 
 
     /**
-     * Gets List UserDTO from DB
+     * Gets List CardDTO from DB
      *
      * @return
      */
@@ -147,15 +109,16 @@ public class CardService {
         return mapToCardDTO(userCards);
     }
 
-    public List<CardDTO> getAllPaginated(int page, int size) {
+    public List<CardDTO> getAllPaginated(int page, int size, String sort, String currentDirection) {
         LOG.info("getAllPaginated:");
-        List<Card> all = cardDao.getAllPaginated(page, size);
+        String direction = currentDirection.equals("asc") ? "ACS" : "DESC";
+        List<Card> all = cardDao.getAllPaginated(page, size, sort, direction);
         LOG.info("Get all users:" + all);
         return mapToCardDTO(all);
     }
 
     /**
-     * Adds List User to List UserDTO
+     * Adds List Card to List CardDTO
      *
      * @param all
      * @return
@@ -191,13 +154,6 @@ public class CardService {
     }
 
 
-//    public boolean changePendingConditionToActive(long id) {
-//        Card updatedCard = cardDao.getById(id);
-//        updatedCard.setCardCondition(CardCondition.ACTIVE);
-//        LOG.info("change Pending Condition To Active");
-//        return cardDao.update(updatedCard);
-//
-//    }
 
 
     public boolean changeConditionCard(long id, CardCondition cardCondition) {

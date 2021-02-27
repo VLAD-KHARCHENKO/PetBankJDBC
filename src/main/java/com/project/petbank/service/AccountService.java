@@ -25,41 +25,28 @@ public class AccountService {
         return accountDao.getById(id);
     }
 
-    /**
-     * Gets User by Login from DB
-     *
-     * @param
-     * @return
-     */
+
     public Account getCardByNumber(String number) {
         return accountDao.getByNumber(number);
     }
 
 
 
-    /**
-     * Gets List UserDTO from DB
-     *
-     * @return
-     */
+
     public List<AccountDTO> getAll() {
         List<Account> all = accountDao.getAll();
         return mapToAccountDTO(all);
     }
 
-    public List<AccountDTO> getAllPaginated(int page, int size) {
+    public List<AccountDTO> getAllPaginated(int page, int size, String sort, String currentDirection) {
         LOG.info("getAllPaginated:");
-        List<Account> all = accountDao.getAllPaginated(page, size);
+        String direction = currentDirection.equals("asc") ? "ASC" : "DESC";
+        List<Account> all = accountDao.getAllPaginated(page, size, sort, direction);
         LOG.info("Get all users:" + all);
         return mapToAccountDTO(all);
     }
 
-    /**
-     * Adds List User to List UserDTO
-     *
-     * @param all
-     * @return
-     */
+
     private List<AccountDTO> mapToAccountDTO(List<Account> all) {
         return all.stream().map(account -> {
             Account accountProfile = accountDao.getById(account.getId());

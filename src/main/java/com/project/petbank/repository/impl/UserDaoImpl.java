@@ -10,6 +10,7 @@ import com.project.petbank.repository.GetAllDao;
 import com.project.petbank.repository.UserDao;
 import org.apache.log4j.Logger;
 
+import java.sql.RowId;
 import java.util.List;
 
 public class UserDaoImpl extends AbstractDao<User> implements UserDao, GetAllDao<User> {
@@ -26,7 +27,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao, GetAllDao
     private static final String COLUMN_IS_ACTIVE = "isActive";
     private static final String COLUMN_ROLE = "role";
     private static final String SELECT_ALL_USERS = "SELECT * FROM `user` ";
-    private static final String SELECT_ALL_USERS_PAGINATED = "SELECT * FROM `user` LIMIT ?,?";
+    private static final String SELECT_ALL_USERS_PAGINATED = "SELECT * FROM `user` ORDER BY  %s %s LIMIT ?, ? ";
 
     private static final String INSERT_INTO_USER = "INSERT INTO `user` ("
             + COLUMN_FIRST_NAME + ", "
@@ -83,15 +84,21 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao, GetAllDao
     }
 
     @Override
-    public List<User> getAllPaginated(int page, int size) {
-        LOG.debug("getAllPaginated : ");
-        int limit = (page - 1) * size;
-        return getAll(SELECT_ALL_USERS_PAGINATED,
+    public List<User> getAllPaginated(int page, int size, String sort,String direction ) {
+        LOG.debug("getAllPaginated String sort: "+sort);
+        String strSQLQuery=String.format(SELECT_ALL_USERS_PAGINATED,sort,direction);
+        int limit = (page) * size;
+        return getAll(strSQLQuery,
                 ps -> {
                     ps.setInt(1, limit);
                     ps.setInt(2, size);
                 },
                 getMapper());
+    }
+
+    @Override
+    public List<User> getAllPaginated(long accountId, int page, int size, String sort, String direction) {
+        return null;
     }
 
     @Override

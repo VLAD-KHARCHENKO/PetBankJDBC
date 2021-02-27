@@ -22,7 +22,7 @@ public class PaymentDTO {
 
     public PaymentDTO(long id, LocalDateTime date, Account debit, Account credit, BigDecimal amount, String description, Status status) {
         this.id = id;
-        this.date = date.format(DateTimeFormatter.ofPattern("dd.MM.HH:mm"));
+        this.date = date.format(DateTimeFormatter.ofPattern("dd.MM HH:mm"));
         this.debit = debit;
         this.credit = credit;
         this.amount = amount;

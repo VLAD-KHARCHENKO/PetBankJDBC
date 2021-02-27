@@ -26,21 +26,26 @@ public abstract class AbstractDao<T> implements CrudDao<T> {
     protected static final String COLUMN_ID = "id";
 
     public List<T> getAll(String query, EntityMapper<T> mapper) {
+        LOG.debug("String query : "+query);
         return getAll(query, null, mapper);
     }
 
     public List<T> getAll(String query, StatementMapper<T> statementMapper, EntityMapper<T> mapper) {
+        LOG.debug("String query : "+query);
         List<T> result = new ArrayList<>();
         Connection conn = getConnection();
         try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             if (statementMapper != null) {
                 statementMapper.map(preparedStatement);
+                LOG.debug("statementMapper : "+statementMapper.toString());
             }
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
+
                 while (resultSet.next()) {
                     T entity = mapper.map(resultSet);
                     result.add(entity);
                 }
+                LOG.debug("ResultSet resultSet : "+resultSet.toString());
             }
         } catch (SQLException e) {
             LOG.error("Exception while getting all entities", e);

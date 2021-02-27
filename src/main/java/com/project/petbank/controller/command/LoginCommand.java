@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import static com.project.petbank.view.PageUrlConstants.*;
 
 
-
 public class LoginCommand extends UniCommand {
     private UserService userService;
     private static final Logger LOG = Logger.getLogger(LoginCommand.class);
@@ -34,19 +33,24 @@ public class LoginCommand extends UniCommand {
 
 
         HttpSession session = request.getSession();
+        if (!(userService.validateUserActive(email))){
+            request.setAttribute("notification", "You are blocked");
+            return new PageResponse(LOGIN_PAGE, false);
+        }
 
         if (userService.validateUser(email, password)) {
             User user = userService.getUserByLogin(email);
             LOG.info("get user by login" + user);
             session.setAttribute("user", user);
             if (user.getRole() == Role.ADMIN) {
-                return new PageResponse( ADMIN_PAGE, true);
+                return new PageResponse(ADMIN_PAGE, true);
             } else if (user.getRole() == Role.CUSTOMER) {
-                return new PageResponse( USER_PAGE, true);
+                return new PageResponse(USER_PAGE, true);
             } else {
                 return new PageResponse(HOME_PAGE, true);
             }
         }
+        LOG.info("setAttribute notification" );
         request.setAttribute("notification", "Login or password invalid!");
         return new PageResponse(LOGIN_PAGE, false);
 

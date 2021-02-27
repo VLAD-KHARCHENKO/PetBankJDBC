@@ -9,8 +9,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
-//import org.apache.logging.log4j.LogManager;
-//import org.apache.logging.log4j.Logger;
+
 
 public class DataSourceConnectionFactory implements ConnectionFactory {
     private static Logger LOG = Logger.getLogger(com.project.petbank.config.DataSourceConnectionFactory.class);
