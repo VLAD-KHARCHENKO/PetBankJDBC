@@ -1,11 +1,9 @@
 package com.project.petbank.model;
 
 import com.project.petbank.model.enums.Role;
-import lombok.*;
 
 import java.util.Objects;
 
-@Builder
 public class User {
     private long id;
     private String firstName;
@@ -15,7 +13,7 @@ public class User {
     private boolean isActive;
     private Role role;
 
-       public User(long id, String firstName, String lastName, String email, String password, boolean isActive, Role role) {
+    public User(long id, String firstName, String lastName, String email, String password, boolean isActive, Role role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -25,7 +23,14 @@ public class User {
         this.role = role;
     }
 
-
+    public User(String firstName, String lastName, String email, String password, boolean isActive, Role role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.isActive = isActive;
+        this.role = role;
+    }
 
     public long getId() {
         return id;
@@ -114,4 +119,5 @@ public class User {
                 ", role=" + role +
                 '}';
     }
+
 }

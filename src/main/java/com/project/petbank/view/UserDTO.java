@@ -1,21 +1,15 @@
 package com.project.petbank.view;
 
-import com.project.petbank.model.enums.CardName;
 import com.project.petbank.model.enums.Role;
 
-
 import java.util.Objects;
-
-
-
-
 
 public class UserDTO {
     private long id;
     private String firstName;
     private String lastName;
     private String email;
-       private String active;
+    private String active;
     private Role role;
 
     public UserDTO(long id, String firstName, String lastName, String email, String active, Role role) {
@@ -26,8 +20,6 @@ public class UserDTO {
         this.active = active;
         this.role = role;
     }
-
-
 
     public long getId() {
         return id;
@@ -60,8 +52,6 @@ public class UserDTO {
     public void setEmail(String email) {
         this.email = email;
     }
-
-
 
     public String getActive() {
         return active;
@@ -100,7 +90,7 @@ public class UserDTO {
                 Objects.equals(firstName, userDTO.firstName) &&
                 Objects.equals(lastName, userDTO.lastName) &&
                 Objects.equals(email, userDTO.email) &&
-                               Objects.equals(active, userDTO.active) &&
+                Objects.equals(active, userDTO.active) &&
                 role == userDTO.role;
     }
 
@@ -108,4 +98,5 @@ public class UserDTO {
     public int hashCode() {
         return Objects.hash(id, firstName, lastName, email, active, role);
     }
+
 }

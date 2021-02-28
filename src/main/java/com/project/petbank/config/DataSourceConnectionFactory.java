@@ -9,11 +9,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
-
-
 public class DataSourceConnectionFactory implements ConnectionFactory {
-    private static Logger LOG = Logger.getLogger(com.project.petbank.config.DataSourceConnectionFactory.class);
-    private static final com.project.petbank.config.DataSourceConnectionFactory INSTANCE = new com.project.petbank.config.DataSourceConnectionFactory();
+    private static final Logger LOG = Logger.getLogger(DataSourceConnectionFactory.class);
+    private static final DataSourceConnectionFactory INSTANCE = new DataSourceConnectionFactory();
 
     private static DataSource dataSource;
 
@@ -23,11 +21,9 @@ public class DataSourceConnectionFactory implements ConnectionFactory {
     static {
         Properties properties = new Properties();
         try {
-            properties.load(com.project.petbank.config.DataSourceConnectionFactory.class.getResourceAsStream("/db.properties"));
+            properties.load(DataSourceConnectionFactory.class.getResourceAsStream("/db.properties"));
             MysqlDataSource mysqlDataSource = new MysqlDataSource();
             mysqlDataSource.setUrl(properties.getProperty("DB_URL"));
-            //mysqlDataSource.setDatabaseName(properties.getProperty("DB_NAME"));
-
             mysqlDataSource.setUser(properties.getProperty("DB_USERNAME"));
             mysqlDataSource.setPassword(properties.getProperty("DB_PASSWORD"));
             dataSource = mysqlDataSource;
@@ -38,7 +34,7 @@ public class DataSourceConnectionFactory implements ConnectionFactory {
         }
     }
 
-    public com.project.petbank.config.DataSourceConnectionFactory getInstance() {
+    public DataSourceConnectionFactory getInstance() {
         return INSTANCE;
     }
 

@@ -2,6 +2,7 @@ package com.project.petbank.model;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 public class Account {
     private long id;
@@ -74,5 +75,22 @@ public class Account {
                 ", isActive=" + isActive +
                 ", userId=" + userId +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Account)) return false;
+        Account account = (Account) o;
+        return getId() == account.getId() &&
+                isActive() == account.isActive() &&
+                getUserId() == account.getUserId() &&
+                Objects.equals(getNumber(), account.getNumber()) &&
+                Objects.equals(getBalance(), account.getBalance());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getNumber(), getBalance(), isActive(), getUserId());
     }
 }

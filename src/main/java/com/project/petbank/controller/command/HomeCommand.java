@@ -10,10 +10,8 @@ import static com.project.petbank.view.PageUrlConstants.HOME_PAGE;
 public class HomeCommand implements Command {
     private static final Logger LOG = Logger.getLogger(HomeCommand.class);
 
-
     @Override
     public PageResponse execute(HttpServletRequest request) {
-
         return new PageResponse(HOME_PAGE);
     }
 }

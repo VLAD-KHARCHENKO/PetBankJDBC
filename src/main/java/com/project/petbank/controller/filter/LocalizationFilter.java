@@ -47,4 +47,16 @@ public class LocalizationFilter implements Filter {
         }
     }
 
+    @Override
+    public void destroy() {
+    }
+
+    public String getDefaultLocale() {
+        return defaultLocale;
+    }
+
+    public String getDefaultBundle() {
+        return defaultBundle;
+    }
+
 }

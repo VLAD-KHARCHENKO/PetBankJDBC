@@ -7,50 +7,50 @@
 <html lang="en">
 
 <head>
-     <title>SB Admin 2 - Blank</title>
+    <title>SB Admin 2 - Blank</title>
     <c:import url="templ/head-part.jsp"/>
 
-   </head>
+</head>
 
 <body id="page-top">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+<!-- Page Wrapper -->
+<div id="wrapper">
 
-        <c:import url="templ/header-part.jsp"/>
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+    <c:import url="templ/header-part.jsp"/>
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
-            <div id="content">
+        <!-- Main Content -->
+        <div id="content">
 
-                <c:import url="templ/topbar-part.jsp"/>
+            <c:import url="templ/topbar-part.jsp"/>
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
-
-                </div>
-                <!-- /.container-fluid -->
+                <!-- Page Heading -->
+                <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
 
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <c:import url="templ/footer-part.jsp"/>
-            <!-- End of Footer -->
+            <!-- /.container-fluid -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <c:import url="templ/footer-part.jsp"/>
+        <!-- End of Footer -->
 
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Content Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <c:import url="templ/logout-part.jsp"/>
-    <c:import url="templ/loader-part.jsp"/>
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<c:import url="templ/logout-part.jsp"/>
+<c:import url="templ/loader-part.jsp"/>
 
 </body>
 

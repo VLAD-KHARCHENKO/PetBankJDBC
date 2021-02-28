@@ -1,6 +1,5 @@
 package com.project.petbank.controller.data;
 
-
 public class PageResponse {
 
     private String url;
@@ -33,4 +32,5 @@ public class PageResponse {
     public void setRedirect(boolean redirect) {
         this.redirect = redirect;
     }
+
 }

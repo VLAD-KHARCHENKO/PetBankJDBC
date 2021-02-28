@@ -17,4 +17,5 @@ public class PasswordsUtil {
         BCrypt.Result result = BCrypt.verifyer().verify(password.getBytes(StandardCharsets.UTF_8), hash.getBytes(StandardCharsets.UTF_8));
         return result.verified;
     }
+
 }

@@ -1,43 +1,41 @@
 package com.project.petbank.repository;
 
-
 import com.project.petbank.config.ConnectionFactory;
-import com.project.petbank.model.Account;
-import com.project.petbank.model.Card;
-import com.project.petbank.model.Payment;
-import com.project.petbank.model.enums.CardCondition;
-import lombok.RequiredArgsConstructor;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@RequiredArgsConstructor
+
 public abstract class AbstractDao<T> implements CrudDao<T> {
     private static final Logger LOG = Logger.getLogger(AbstractDao.class);
+    protected static final String COLUMN_ID = "id";
 
     private final ConnectionFactory connectionFactory;
+
+
+    public AbstractDao(ConnectionFactory connectionFactory) {
+        this.connectionFactory = connectionFactory;
+    }
 
     protected Connection getConnection() {
         return connectionFactory.getConnection();
     }
 
-    protected static final String COLUMN_ID = "id";
-
     public List<T> getAll(String query, EntityMapper<T> mapper) {
-        LOG.debug("String query : "+query);
+        LOG.debug("String query : " + query);
         return getAll(query, null, mapper);
     }
 
     public List<T> getAll(String query, StatementMapper<T> statementMapper, EntityMapper<T> mapper) {
-        LOG.debug("String query : "+query);
+        LOG.debug("String query : " + query);
         List<T> result = new ArrayList<>();
         Connection conn = getConnection();
         try (PreparedStatement preparedStatement = conn.prepareStatement(query)) {
             if (statementMapper != null) {
                 statementMapper.map(preparedStatement);
-                LOG.debug("statementMapper : "+statementMapper.toString());
+                LOG.debug("statementMapper : " + statementMapper.toString());
             }
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
 
@@ -45,7 +43,7 @@ public abstract class AbstractDao<T> implements CrudDao<T> {
                     T entity = mapper.map(resultSet);
                     result.add(entity);
                 }
-                LOG.debug("ResultSet resultSet : "+resultSet.toString());
+                LOG.debug("ResultSet resultSet : " + resultSet.toString());
             }
         } catch (SQLException e) {
             LOG.error("Exception while getting all entities", e);
@@ -125,7 +123,6 @@ public abstract class AbstractDao<T> implements CrudDao<T> {
                 LOG.error("Could not create entity.");
                 return -1;
             }
-
             try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     long generatedId = generatedKeys.getLong(1);
@@ -184,6 +181,5 @@ public abstract class AbstractDao<T> implements CrudDao<T> {
             LOG.error("Could not close connection.", e);
         }
     }
-
 
 }

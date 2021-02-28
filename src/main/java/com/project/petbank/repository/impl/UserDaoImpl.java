@@ -1,6 +1,5 @@
 package com.project.petbank.repository.impl;
 
-
 import com.project.petbank.config.ConnectionFactory;
 import com.project.petbank.model.User;
 import com.project.petbank.model.enums.Role;
@@ -10,16 +9,15 @@ import com.project.petbank.repository.GetAllDao;
 import com.project.petbank.repository.UserDao;
 import org.apache.log4j.Logger;
 
-import java.sql.RowId;
 import java.util.List;
 
 public class UserDaoImpl extends AbstractDao<User> implements UserDao, GetAllDao<User> {
-    private static final Logger LOG = Logger.getLogger(UserDaoImpl.class);
 
     public UserDaoImpl(ConnectionFactory connectionFactory) {
         super(connectionFactory);
     }
 
+    private static final Logger LOG = Logger.getLogger(UserDaoImpl.class);
     private static final String COLUMN_FIRST_NAME = "first_name";
     private static final String COLUMN_SECOND_NAME = "last_name";
     private static final String COLUMN_EMAIL = "email";
@@ -48,7 +46,6 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao, GetAllDao
 
     private static final String DELETE_USER = "DELETE FROM `user` "
             + "WHERE " + COLUMN_ID + " = ?";
-
 
     @Override
     public boolean isUserExists(String email) {
@@ -84,9 +81,9 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao, GetAllDao
     }
 
     @Override
-    public List<User> getAllPaginated(int page, int size, String sort,String direction ) {
-        LOG.debug("getAllPaginated String sort: "+sort);
-        String strSQLQuery=String.format(SELECT_ALL_USERS_PAGINATED,sort,direction);
+    public List<User> getAllPaginated(int page, int size, String sort, String direction) {
+        LOG.debug("getAllPaginated String sort: " + sort);
+        String strSQLQuery = String.format(SELECT_ALL_USERS_PAGINATED, sort, direction);
         int limit = (page) * size;
         return getAll(strSQLQuery,
                 ps -> {
@@ -152,4 +149,5 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao, GetAllDao
                 resultSet.getBoolean(COLUMN_IS_ACTIVE),
                 Role.valueOf(resultSet.getString(COLUMN_ROLE)));
     }
+
 }

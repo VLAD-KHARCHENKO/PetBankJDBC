@@ -39,12 +39,28 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th><a href="users?page=${currentPage}&size=3&sort=first_name&direction=${direction}" class="search_link"><fmt:message key="first.name"/></a></th>
-                                    <th><a href="users?page=${currentPage}&size=3&sort=last_name&direction=${direction}" class="search_link"><fmt:message key="last.name"/></a></th>
-                                    <th><a href="users?page=${currentPage}&size=3&sort=email&direction=${direction}" class="search_link"><fmt:message key="email"/></a></th>
-                                    <th><fmt:message key="condition"/></th>
-                                    <th><fmt:message key="role"/></th>
-                                    <th><fmt:message key="change"/></th>
+                                    <th>
+                                        <a href="users?page=${currentPage}&size=3&sort=first_name&direction=${direction}"
+                                           class="search_link">
+                                            <fmt:message key="first.name"/>
+                                        </a></th>
+                                    <th><a href="users?page=${currentPage}&size=3&sort=last_name&direction=${direction}"
+                                           class="search_link">
+                                        <fmt:message key="last.name"/>
+                                    </a></th>
+                                    <th><a href="users?page=${currentPage}&size=3&sort=email&direction=${direction}"
+                                           class="search_link">
+                                        <fmt:message key="email"/>
+                                    </a></th>
+                                    <th>
+                                        <fmt:message key="condition"/>
+                                    </th>
+                                    <th>
+                                        <fmt:message key="role"/>
+                                    </th>
+                                    <th>
+                                        <fmt:message key="change"/>
+                                    </th>
                                 </tr>
                                 </thead>
 
@@ -52,14 +68,17 @@
                                 <c:forEach items="${users}" var="user">
                                     <tr>
                                         <td>${user.id}</td>
-                                        <td><a href="cards?userId=${user.id}" class="search_link">${user.firstName}</a></td>
+                                        <td><a href="cards?userId=${user.id}" class="search_link">${user.firstName}</a>
+                                        </td>
                                         <td>${user.lastName}</td>
                                         <td>${user.email}</td>
                                         <td>${user.active}</td>
                                         <td>${user.role}</td>
                                         <td>
                                             <a href="profile?id=${user.id}" class="btn btn-primary btn-lg "
-                                               tabindex="-1" role="button" aria-disabled="true">  <fmt:message key="change"/></a>
+                                               tabindex="-1" role="button" aria-disabled="true">
+                                                <fmt:message key="change"/>
+                                            </a>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -74,28 +93,38 @@
                                 <ul class="pagination">
                                     <c:choose>
                                         <c:when test="${currentPage  != 0 }">
-                                            <li class="page-item"><a href="users?page=${currentPage-1}&size=3&sort=${sort}&direction=${currentDirection}"><span class="page-link"><fmt:message key="prev"/></span></a></li>
+                                            <li class="page-item"><a
+                                                    href="users?page=${currentPage-1}&size=3&sort=${sort}&direction=${currentDirection}"><span
+                                                    class="page-link"><fmt:message key="prev"/></span></a></li>
                                         </c:when>
                                         <c:otherwise>
-                                            <li class="page-item disabled"><span class="page-link"><fmt:message key="prev"/></span></li>
+                                            <li class="page-item disabled"><span class="page-link"><fmt:message
+                                                    key="prev"/></span></li>
                                         </c:otherwise>
                                     </c:choose>
-                                    <c:forEach var = "numberPage" begin = "1" end = "${usersPages}">
+                                    <c:forEach var="numberPage" begin="1" end="${usersPages}">
                                         <c:choose>
                                             <c:when test="${currentPage == (numberPage-1) }">
-                                                <li class="page-item active"><a href="users?page=${numberPage-1}&size=3&sort=${sort}&direction=${currentDirection}" class="page-link">${numberPage}</a></li>
+                                                <li class="page-item active"><a
+                                                        href="users?page=${numberPage-1}&size=3&sort=${sort}&direction=${currentDirection}"
+                                                        class="page-link">${numberPage}</a></li>
                                             </c:when>
                                             <c:otherwise>
-                                                <li class="page-item"><a href="users?page=${numberPage-1}&size=3&sort=${sort}&direction=${currentDirection}" class="page-link">${numberPage}</a></li>
+                                                <li class="page-item"><a
+                                                        href="users?page=${numberPage-1}&size=3&sort=${sort}&direction=${currentDirection}"
+                                                        class="page-link">${numberPage}</a></li>
                                             </c:otherwise>
                                         </c:choose>
                                     </c:forEach>
                                     <c:choose>
                                         <c:when test="${currentPage < (usersPages-1) }">
-                                            <li class="page-item"><a href="users?page=${currentPage+1}&size=3&sort=${sort}&direction=${currentDirection}"><span class="page-link"><fmt:message key="next"/></span></a></li>
+                                            <li class="page-item"><a
+                                                    href="users?page=${currentPage+1}&size=3&sort=${sort}&direction=${currentDirection}"><span
+                                                    class="page-link"><fmt:message key="next"/></span></a></li>
                                         </c:when>
                                         <c:otherwise>
-                                            <li class="page-item disabled"><span class="page-link"><fmt:message key="next"/></span></li>
+                                            <li class="page-item disabled"><span class="page-link"><fmt:message
+                                                    key="next"/></span></li>
                                         </c:otherwise>
                                     </c:choose>
                                 </ul>
@@ -129,4 +158,4 @@
 
 </body>
 
-</html>
+        </html>

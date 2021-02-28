@@ -31,8 +31,6 @@ insert into `card`  (`card_name`,`number`,`card_condition`, `account_id`)  value
 ('UNIVERSAL', 1242, 'BLOCKED', 9),
 ('CREDIT', 1243, 'PENDING', 10);
 
-
-
 insert into `payment`  (`date`, `debit_account_id`,`credit_account_id`, `amount`, `description`, `status`)  values
 ('2019-08-20 11:00:00', 1, 2, 20.00, 'оплата за','SAVE'),
 ('2019-08-20 11:00:00', 3, 4, 15.80, 'оплата за','PAID'),

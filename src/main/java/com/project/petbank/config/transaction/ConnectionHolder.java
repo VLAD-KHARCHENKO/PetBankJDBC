@@ -2,16 +2,6 @@ package com.project.petbank.config.transaction;
 
 import java.sql.Connection;
 
-/**
- * The {@code ConnectionHolder} class store connection which use by
- * {@link com.theatre.movie.persistence.transaction.TransactionManager} class
- * and provide methods for <tt>get</tt> and <tt>set</tt> it
- * Properties: <b>currentConnection</b>
- *
- * @author Hlushchenko Renata
- * @see ThreadLocal
- */
-
 public class ConnectionHolder {
 
     private static ThreadLocal<Connection> currentConnection = new ThreadLocal<>();

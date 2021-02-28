@@ -1,6 +1,5 @@
 package com.project.petbank.repository.impl;
 
-
 import com.project.petbank.config.ConnectionFactory;
 import com.project.petbank.model.Account;
 import com.project.petbank.repository.AbstractDao;
@@ -11,20 +10,18 @@ import org.apache.log4j.Logger;
 import java.util.List;
 
 public class AccountDaoImpl extends AbstractDao<Account> implements GetAllDao<Account> {
-    private static final Logger LOG = Logger.getLogger(AccountDaoImpl.class);
 
     public AccountDaoImpl(ConnectionFactory connectionFactory) {
         super(connectionFactory);
     }
 
+    private static final Logger LOG = Logger.getLogger(AccountDaoImpl.class);
     private static final String COLUMN_NUMBER = "number";
     private static final String COLUMN_BALANCE = "balance";
     private static final String COLUMN_IS_ACTIVE = "isActive";
     private static final String COLUMN_USER_ID = "user_id";
     private static final String SELECT_ALL_ACCOUNT = "SELECT * FROM `account` ";
     private static final String SELECT_PAGINATE_ACCOUNT = "SELECT * FROM `account` LIMIT ?,?";
-
-
 
     private static final String INSERT_INTO_ACCOUNT = "INSERT INTO `account` ("
             + COLUMN_NUMBER + ", "
@@ -41,7 +38,6 @@ public class AccountDaoImpl extends AbstractDao<Account> implements GetAllDao<Ac
 
     private static final String DELETE_ACCOUNT = "DELETE FROM `account` "
             + "WHERE " + COLUMN_ID + " = ?";
-
 
     @Override
     public List<Account> getAll() {
@@ -63,7 +59,7 @@ public class AccountDaoImpl extends AbstractDao<Account> implements GetAllDao<Ac
     }
 
     @Override
-    public List<Account> getAllPaginated(int page, int size, String sort,String direction) {
+    public List<Account> getAllPaginated(int page, int size, String sort, String direction) {
         LOG.debug("getAllPaginated : ");
         int limit = (page - 1) * size;
         return getAll(SELECT_PAGINATE_ACCOUNT,
@@ -83,13 +79,6 @@ public class AccountDaoImpl extends AbstractDao<Account> implements GetAllDao<Ac
     public Account getById(long id) {
         return getByField(SELECT_ALL_ACCOUNT + "WHERE id = ?",
                 ps -> ps.setLong(1, id),
-                getMapper());
-    }
-
-
-    public Account getByNumber(String number) {
-        return getByField(SELECT_ALL_ACCOUNT + "WHERE number = ?",
-                ps -> ps.setString(1, number),
                 getMapper());
     }
 
@@ -133,4 +122,5 @@ public class AccountDaoImpl extends AbstractDao<Account> implements GetAllDao<Ac
                 resultSet.getBoolean(COLUMN_IS_ACTIVE),
                 resultSet.getLong(COLUMN_USER_ID));
     }
+
 }

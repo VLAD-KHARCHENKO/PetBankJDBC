@@ -1,15 +1,14 @@
 package com.project.petbank.config.transaction;
 
 import com.project.petbank.config.ConnectionFactory;
-
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class TransactionManager {
     private static final Logger LOG = Logger.getLogger(TransactionManager.class);
 

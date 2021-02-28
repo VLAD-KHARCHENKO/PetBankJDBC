@@ -239,8 +239,8 @@
                                                         class="page-link"><fmt:message key="prev"/></span></a></li>
                                             </c:when>
                                             <c:otherwise>
-                                                <li class="page-item disabled"><span class="page-link"><spring:message
-                                                        code="prev"/></span></li>
+                                                <li class="page-item disabled"><span class="page-link"><fmt:message
+                                                        key="prev"/></span></li>
                                             </c:otherwise>
                                         </c:choose>
                                         <c:forEach var="numberPage" begin="1" end="${paidPaymentsPages}">

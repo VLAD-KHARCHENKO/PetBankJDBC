@@ -32,15 +32,6 @@ primary key (id),
 foreign key (account_id) references account(id)
 );
 
-create table card_list(
-id bigint auto_increment,
-account_id bigint,
-card_id bigint,
-primary key (id),
-foreign key (account_id) references account(id),
-foreign key (card_id) references card(id)
-);
-
 create table payment(
 id bigint auto_increment,
 `date` datetime,

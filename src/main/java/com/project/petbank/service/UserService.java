@@ -1,6 +1,5 @@
 package com.project.petbank.service;
 
-
 import com.project.petbank.model.User;
 import com.project.petbank.model.enums.Role;
 import com.project.petbank.repository.impl.UserDaoImpl;
@@ -11,10 +10,10 @@ import org.apache.log4j.Logger;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 public class UserService {
 
     private static final Logger LOG = Logger.getLogger(UserService.class);
+
     private UserDaoImpl userDao;
 
     public UserService(UserDaoImpl userDao) {
@@ -98,17 +97,9 @@ public class UserService {
         return userDao.getByLogin(login);
     }
 
-
     public User registrationUser(String firstName, String lastName, String email, String password) {
         String hashedPass = PasswordsUtil.hash(password.trim());
-        User newUser = User.builder()
-                .firstName(firstName)
-                .lastName(lastName)
-                .email(email)
-                .password(hashedPass)
-                .isActive(true)
-                .role(Role.CUSTOMER)
-                .build();
+        User newUser = new User(firstName, lastName, email, hashedPass, true, Role.CUSTOMER);
         userDao.create(newUser);
         return newUser;
     }
@@ -131,6 +122,12 @@ public class UserService {
         return mapToUserDTO(all);
     }
 
+    public User updateUser(long id, String firstName, String lastName, String email, String password, boolean active, Role role) {
+        User updatedUser = new User(id, firstName, lastName, email, password, active, role);
+        userDao.update(updatedUser);
+        return updatedUser;
+    }
+
     /**
      * Adds List User to List UserDTO
      *
@@ -140,7 +137,7 @@ public class UserService {
     private List<UserDTO> mapToUserDTO(List<User> all) {
         return all.stream().map(users -> {
             User userProfile = userDao.getById(users.getId());
-            UserDTO userDTO = new UserDTO(
+            return new UserDTO(
                     userProfile.getId(),
                     userProfile.getFirstName(),
                     userProfile.getLastName(),
@@ -148,19 +145,7 @@ public class UserService {
                     userProfile.isActive() ? "Active" : "Blocked",
                     userProfile.getRole()
             );
-
-            return userDTO;
         }).collect(Collectors.toList());
     }
 
-    public User updateUser(long id, String firstName, String lastName, String email, String password, boolean active, Role role) {
-        User updatedUser = new User(id, firstName, lastName, email, password, active, role);
-        userDao.update(updatedUser);
-        return updatedUser;
-    }
-
-    public void deleteUser(int id) {
-        User deleteUser = getUser(id);
-        userDao.remove(deleteUser);
-    }
 }

@@ -1,6 +1,5 @@
 package com.project.petbank.service;
 
-
 import com.project.petbank.config.transaction.TransactionHandler;
 import com.project.petbank.model.Account;
 import com.project.petbank.model.Card;
@@ -17,7 +16,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
-
 
 public class PaymentService {
 
@@ -38,7 +36,6 @@ public class PaymentService {
         return paymentDao.getById(id);
     }
 
-
     public List<PaymentDTO> getSavedPaymentByAccountNumber(Long accountId) {
         return mapToPaymentDTO(paymentDao.findAllSaveByAccountId(accountId));
     }
@@ -47,31 +44,29 @@ public class PaymentService {
         return mapToPaymentDTO(paymentDao.findAllPaidByAccountId(accountId));
     }
 
-
     public List<PaymentDTO> getAll() {
         List<Payment> all = paymentDao.getAll();
         return mapToPaymentDTO(all);
     }
 
-
-    public Payment submitPayment(long paymentId) {
+    public void submitPayment(long paymentId) {
         Payment payment = paymentDao.getById(paymentId);
 
         if (!(validateBalance(payment.getCreditAccountId(), payment.getAmount())
                 && validateCard(payment.getCreditAccountId()) &&
                 validateCard(payment.getDebitAccountId()))) {
-            return null;
+            return;
         }
-        transactionHandler.runInTransaction(() -> {
-        payment.setDate(LocalDateTime.now());
-        changeBalance(payment.getCreditAccountId(), payment.getAmount().negate());
-        changeBalance(payment.getDebitAccountId(), payment.getAmount());
-        payment.setStatus(Status.PAID);
-        paymentDao.update(payment);
-        });
-        return payment;
-    }
 
+        transactionHandler.runInTransaction(() -> {
+
+            payment.setDate(LocalDateTime.now());
+            changeBalance(payment.getCreditAccountId(), payment.getAmount().negate());
+            changeBalance(payment.getDebitAccountId(), payment.getAmount());
+            payment.setStatus(Status.PAID);
+            paymentDao.update(payment);
+        });
+    }
 
     public List<PaymentDTO> getAllPaginated(long accountId, int page, int size, String sort, String currentDirection) {
         LOG.info("getAllPaginated:");
@@ -80,7 +75,6 @@ public class PaymentService {
         LOG.info("Get all Payment:" + all);
         return mapToPaymentDTO(all);
     }
-
 
     public void deletePayment(long id) {
         Payment deletePayment = getPayment(id);
@@ -98,8 +92,8 @@ public class PaymentService {
         return account.getBalance().compareTo(amount) >= 0;
     }
 
-    public boolean validateAmount(BigDecimal amount){
-        return amount.compareTo(BigDecimal.valueOf(0.01))>=0;
+    public boolean validateAmount(BigDecimal amount) {
+        return amount.compareTo(BigDecimal.valueOf(0.01)) >= 0;
     }
 
     public boolean validateCard(long accountId) {
@@ -113,8 +107,6 @@ public class PaymentService {
         if (card == null || !validateAmount(amount)) {
             return null;
         }
-
-
         Payment payment = new Payment(
                 LocalDateTime.now(), card.getId(), creditCardId, amount, description, Status.SAVE);
         return paymentDao.create(payment);
@@ -124,7 +116,6 @@ public class PaymentService {
         return all.stream().map(payment -> {
             Account accountDebit = accountDao.getById(payment.getDebitAccountId());
             Account accountCredit = accountDao.getById(payment.getCreditAccountId());
-
             return new PaymentDTO(
                     payment.getId(),
                     payment.getDate(),
@@ -133,9 +124,7 @@ public class PaymentService {
                     payment.getAmount(),
                     payment.getDescription(),
                     payment.getStatus());
-
         }).collect(Collectors.toList());
     }
-
 
 }

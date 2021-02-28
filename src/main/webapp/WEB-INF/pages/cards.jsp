@@ -65,7 +65,8 @@
                         <tbody>
                         <c:forEach items="${cards}" var="card">
                             <tr>
-                                <td><a href="statements?accountId=${card.account.id}&page=0&size=3&sort=id" class="search_link">${card.cardName}</a>
+                                <td><a href="statements?accountId=${card.account.id}&page=0&size=3&sort=id"
+                                       class="search_link">${card.cardName}</a>
                                 </td>
                                 <td>${card.number}</td>
                                 <td>${card.account.balance}</td>
@@ -206,7 +207,7 @@
                                 </c:forEach>
                             </select>
 
-                            <input  name="amount" class="form-control"
+                            <input name="amount" class="form-control"
                                    aria-label="Dollar amount (with dot and two decimal places)"/>
                             <span class="input-group-text">.00</span>
                             <span class="input-group-text">$</span>

@@ -1,12 +1,10 @@
 package com.project.petbank.config.transaction;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.util.function.Supplier;
 
-
-
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class TransactionHandler {
     private final TransactionManager transactionManager;
 
@@ -33,5 +31,3 @@ public class TransactionHandler {
         }
     }
 }
-
-

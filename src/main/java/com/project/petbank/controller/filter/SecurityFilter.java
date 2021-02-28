@@ -1,7 +1,7 @@
 package com.project.petbank.controller.filter;
 
-import com.project.petbank.model.User;
 import com.project.petbank.config.SecurityConfig;
+import com.project.petbank.model.User;
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
@@ -59,4 +59,5 @@ public class SecurityFilter implements Filter {
         LOG.info("Path: " + (endPoint.isEmpty() ? "context path" : endPoint));
         return "/" + endPoint;
     }
+
 }

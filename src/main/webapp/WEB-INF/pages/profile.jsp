@@ -121,8 +121,8 @@
                                                     </div>
                                                 </c:when>
                                                 <c:otherwise>
-                                                   <input type="hidden" name="active" value="${userProfile.active}"/>
-                                                   <input type="hidden" name="role" value="${userProfile.role}"/>
+                                                    <input type="hidden" name="active" value="${userProfile.active}"/>
+                                                    <input type="hidden" name="role" value="${userProfile.role}"/>
                                                     <hr>
                                                 </c:otherwise>
                                             </c:choose>
@@ -157,8 +157,10 @@
                                                 </c:when>
                                                 <c:otherwise>
                                                     <hr>
-                                                    <input type="hidden" name="password" value="${userProfile.password}"/>
-                                                    <input type="hidden" name="confirmPassword" value="${userProfile.password}"/>
+                                                    <input type="hidden" name="password"
+                                                           value="${userProfile.password}"/>
+                                                    <input type="hidden" name="confirmPassword"
+                                                           value="${userProfile.password}"/>
                                                 </c:otherwise>
                                             </c:choose>
 

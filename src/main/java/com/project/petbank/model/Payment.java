@@ -15,9 +15,6 @@ public class Payment {
     private String description;
     private Status status;
 
-    public Payment() {
-    }
-
     public Payment(long id, LocalDateTime date, long debitAccountId, long creditAccountSd, BigDecimal amount, String description, Status status) {
         this.id = id;
         this.date = date;
@@ -124,4 +121,5 @@ public class Payment {
     public int hashCode() {
         return Objects.hash(getId(), getDate(), getDebitAccountId(), getCreditAccountId(), getAmount(), getDescription(), getStatus());
     }
+
 }

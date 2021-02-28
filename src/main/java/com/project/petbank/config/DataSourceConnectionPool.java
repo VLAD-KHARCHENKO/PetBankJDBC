@@ -10,8 +10,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DataSourceConnectionPool implements ConnectionFactory {
-    private static Logger LOG = Logger.getLogger(com.project.petbank.config.DataSourceConnectionPool.class);
-    private static final com.project.petbank.config.DataSourceConnectionPool INSTANCE = new com.project.petbank.config.DataSourceConnectionPool();
+    private static final Logger LOG = Logger.getLogger(DataSourceConnectionPool.class);
+    private static final DataSourceConnectionPool INSTANCE = new DataSourceConnectionPool();
     private static DataSource dataSource;
 
     static {
@@ -37,7 +37,7 @@ public class DataSourceConnectionPool implements ConnectionFactory {
         return connection;
     }
 
-    public static com.project.petbank.config.DataSourceConnectionPool getInstance() {
+    public static DataSourceConnectionPool getInstance() {
         return INSTANCE;
     }
 }

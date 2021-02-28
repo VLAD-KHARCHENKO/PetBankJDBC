@@ -1,12 +1,11 @@
 package com.project.petbank.view;
 
-
 import java.math.BigDecimal;
 import java.util.Objects;
 
 public class AccountDTO {
     private long id;
- private BigDecimal balance;
+    private BigDecimal balance;
     private String number;
     private String active;
 
@@ -15,9 +14,6 @@ public class AccountDTO {
         this.balance = balance;
         this.number = number;
         this.active = active;
-    }
-
-    public AccountDTO() {
     }
 
     public long getId() {
@@ -77,4 +73,5 @@ public class AccountDTO {
     public int hashCode() {
         return Objects.hash(id, balance, number, active);
     }
+
 }

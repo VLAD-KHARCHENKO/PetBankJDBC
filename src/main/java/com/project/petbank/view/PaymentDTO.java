@@ -1,9 +1,6 @@
 package com.project.petbank.view;
 
 import com.project.petbank.model.Account;
-import com.project.petbank.model.User;
-import com.project.petbank.model.enums.CardCondition;
-import com.project.petbank.model.enums.CardName;
 import com.project.petbank.model.enums.Status;
 
 import java.math.BigDecimal;
@@ -28,9 +25,6 @@ public class PaymentDTO {
         this.amount = amount;
         this.description = description;
         this.status = status;
-    }
-
-    public PaymentDTO() {
     }
 
     public long getId() {
@@ -120,4 +114,5 @@ public class PaymentDTO {
     public int hashCode() {
         return Objects.hash(getId(), getDate(), getDebit(), getCredit(), getAmount(), getDescription(), getStatus());
     }
+
 }

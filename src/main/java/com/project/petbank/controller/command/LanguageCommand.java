@@ -1,6 +1,5 @@
 package com.project.petbank.controller.command;
 
-
 import com.project.petbank.controller.data.PageResponse;
 import org.apache.log4j.Logger;
 
@@ -16,7 +15,6 @@ public class LanguageCommand implements Command {
         String originUrl = request.getHeader("referer");
         request.getSession().setAttribute(LOCALE, locale);
         LOG.info("locale= " + locale);
-
         return new PageResponse(originUrl, true);
     }
 }

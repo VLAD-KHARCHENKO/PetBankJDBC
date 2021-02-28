@@ -17,7 +17,7 @@
 <div id="wrapper">
 
     <c:import url="templ/header-part.jsp"/>
- 
+
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 

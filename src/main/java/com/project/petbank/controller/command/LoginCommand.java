@@ -1,6 +1,5 @@
 package com.project.petbank.controller.command;
 
-
 import com.project.petbank.controller.data.PageResponse;
 import com.project.petbank.model.User;
 import com.project.petbank.model.enums.Role;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import static com.project.petbank.view.PageUrlConstants.*;
-
 
 public class LoginCommand extends UniCommand {
     private UserService userService;
@@ -30,10 +28,8 @@ public class LoginCommand extends UniCommand {
     protected PageResponse performPost(HttpServletRequest request) {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-
-
         HttpSession session = request.getSession();
-        if (!(userService.validateUserActive(email))){
+        if (!(userService.validateUserActive(email))) {
             request.setAttribute("notification", "You are blocked");
             return new PageResponse(LOGIN_PAGE, false);
         }
@@ -50,9 +46,8 @@ public class LoginCommand extends UniCommand {
                 return new PageResponse(HOME_PAGE, true);
             }
         }
-        LOG.info("setAttribute notification" );
+        LOG.info("setAttribute notification");
         request.setAttribute("notification", "Login or password invalid!");
         return new PageResponse(LOGIN_PAGE, false);
-
     }
 }

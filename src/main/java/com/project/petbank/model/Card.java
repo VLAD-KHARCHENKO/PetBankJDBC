@@ -1,10 +1,9 @@
 package com.project.petbank.model;
 
-
 import com.project.petbank.model.enums.CardCondition;
 import com.project.petbank.model.enums.CardName;
 
-
+import java.util.Objects;
 
 public class Card {
 
@@ -13,8 +12,6 @@ public class Card {
     private long number;
     private CardCondition cardCondition;
     private long accountId;
-
-
 
     public Card(long id, CardName cardName, long number, CardCondition cardCondition, long accountId) {
         this.id = id;
@@ -81,4 +78,22 @@ public class Card {
                 ", accountId=" + accountId +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Card)) return false;
+        Card card = (Card) o;
+        return getId() == card.getId() &&
+                getNumber() == card.getNumber() &&
+                getAccountId() == card.getAccountId() &&
+                getCardName() == card.getCardName() &&
+                getCardCondition() == card.getCardCondition();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getCardName(), getNumber(), getCardCondition(), getAccountId());
+    }
+
 }

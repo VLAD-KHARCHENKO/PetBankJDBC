@@ -17,4 +17,3 @@ public class PageUrlConstants {
     public static final String PENDING_PAGE = "pending-cards";
 
 }
-

@@ -21,7 +21,7 @@
     <li class="nav-item active">
         <a class="nav-link" href="index">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
+            <span><fmt:message key="dashboard"/></span></a>
     </li>
 
     <!-- Divider -->

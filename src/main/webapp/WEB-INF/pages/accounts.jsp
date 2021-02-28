@@ -59,15 +59,15 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <c:import url="templ/footer-part.jsp"/>
+            <!-- End of Footer -->
+
         </div>
-        <!-- End of Main Content -->
-
-        <!-- Footer -->
-        <c:import url="templ/footer-part.jsp"/>
-        <!-- End of Footer -->
-
-    </div>
-    <!-- End of Content Wrapper -->
+        <!-- End of Content Wrapper -->
 
     </div>
 </div>
@@ -81,4 +81,4 @@
 
 </body>
 
-</html>
+        </html>

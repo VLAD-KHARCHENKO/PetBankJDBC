@@ -16,56 +16,28 @@ public class CommandFactory {
     static {
         getCommandMap.put("index", new HomeCommand());
         getCommandMap.put("admin", new AdminCommand());
-        getCommandMap.put("user", new UserCommand() {
-        });
-        getCommandMap.put("payments", new PaymentCommand(ServiceFactory.getUserService(), ServiceFactory.getCardService(), ServiceFactory.getPaymentService()));
-        getCommandMap.put("statements", new StatementsCommand(ServiceFactory.getUserService(), ServiceFactory.getPaymentService(), ServiceFactory.getCardService()));
+        getCommandMap.put("user", new UserCommand());
+        getCommandMap.put("payments", new PaymentCommand(ServiceFactory.getCardService(), ServiceFactory.getPaymentService()));
+        getCommandMap.put("statements", new StatementsCommand(ServiceFactory.getPaymentService(), ServiceFactory.getCardService()));
         getCommandMap.put("cards", new CardsCommand(ServiceFactory.getCardService()));
         getCommandMap.put("accounts", new AccountCommand(ServiceFactory.getAccountService()));
         getCommandMap.put("profile", new ProfileCommand());
         getCommandMap.put("pending-cards", new PendingCardsCommand(ServiceFactory.getCardService()));
-
-
         getCommandMap.put("language", new LanguageCommand());
         getCommandMap.put("logout", new LogoutCommand());
         getCommandMap.put("users", new UsersCommand(ServiceFactory.getUserService()));
+        getCommandMap.put("login", new LoginCommand(ServiceFactory.getUserService()));
+        getCommandMap.put("register", new RegisterCommand(ServiceFactory.getUserService()));
 
-        getCommandMap.put("login", new LoginCommand(
-                ServiceFactory.getUserService()
-        ));
-        getCommandMap.put("register", new RegisterCommand(
-                ServiceFactory.getUserService()
-        ));
-
-        postCommandMap.put("login", new LoginCommand(
-                ServiceFactory.getUserService()
-        ));
-        postCommandMap.put("register", new RegisterCommand(
-                ServiceFactory.getUserService()
-        ));
-
-        postCommandMap.put("payments", new PaymentCommand(
-                ServiceFactory.getUserService(),
-                ServiceFactory.getCardService(),
-                ServiceFactory.getPaymentService()
-        ));
-        postCommandMap.put("statements", new StatementsCommand(
-                ServiceFactory.getUserService(), ServiceFactory.getPaymentService(), ServiceFactory.getCardService()
-        ));
-        postCommandMap.put("cards", new CardsCommand(
-                ServiceFactory.getCardService()
-        ));
-        postCommandMap.put("users", new UsersCommand(
-                ServiceFactory.getUserService()
-        ));
-        postCommandMap.put("accounts", new AccountCommand(
-                ServiceFactory.getAccountService()
-        ));
-
+        postCommandMap.put("login", new LoginCommand(ServiceFactory.getUserService()));
+        postCommandMap.put("register", new RegisterCommand(ServiceFactory.getUserService()));
+        postCommandMap.put("payments", new PaymentCommand(ServiceFactory.getCardService(), ServiceFactory.getPaymentService()));
+        postCommandMap.put("statements", new StatementsCommand(ServiceFactory.getPaymentService(), ServiceFactory.getCardService()));
+        postCommandMap.put("cards", new CardsCommand(ServiceFactory.getCardService()));
+        postCommandMap.put("users", new UsersCommand(ServiceFactory.getUserService()));
+        postCommandMap.put("accounts", new AccountCommand(ServiceFactory.getAccountService()));
         postCommandMap.put("profile", new ProfileCommand());
         postCommandMap.put("pending-cards", new PendingCardsCommand(ServiceFactory.getCardService()));
-
-
     }
 
     private CommandFactory() {
@@ -85,4 +57,5 @@ public class CommandFactory {
     private static Command postRequestCommand(String path) {
         return postCommandMap.getOrDefault(path, defaultCommand);
     }
+
 }

@@ -24,7 +24,6 @@ public class CardDTO {
         this.account = account;
     }
 
-
     public long getId() {
         return id;
     }
@@ -105,4 +104,5 @@ public class CardDTO {
                 , getUser(), getAccount()
         );
     }
+
 }

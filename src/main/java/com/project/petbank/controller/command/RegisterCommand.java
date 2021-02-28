@@ -1,6 +1,5 @@
 package com.project.petbank.controller.command;
 
-
 import com.project.petbank.controller.data.PageResponse;
 import com.project.petbank.model.User;
 import com.project.petbank.service.UserService;
@@ -9,8 +8,8 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import static com.project.petbank.view.PageUrlConstants.*;
-
+import static com.project.petbank.view.PageUrlConstants.REGISTER_PAGE;
+import static com.project.petbank.view.PageUrlConstants.USER_PAGE;
 
 public class RegisterCommand extends UniCommand {
 
@@ -35,13 +34,11 @@ public class RegisterCommand extends UniCommand {
         String confirmPassword = request.getParameter("confirmPassword");
         LOG.info("Registration firstName: " + firstName + "Registration lastName: " + lastName +
                 ", email: " + email + ", password: " + password);
-
         HttpSession session = request.getSession();
 
         if (userService.validateLogin(email) && userService.validatePassword(password, confirmPassword)) {
             User newUser = userService.registrationUser(firstName, lastName, email, password);
             LOG.debug("registration user: + " + newUser);
-
             User user = userService.getUserByLogin(email);
             session.setAttribute("user", user);
             LOG.info("registration user setAttribute: + " + user);

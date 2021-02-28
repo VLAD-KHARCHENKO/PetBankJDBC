@@ -11,8 +11,8 @@ public class SecurityConfig {
     private static Map<Role, List<String>> securityPages = new HashMap<>();
 
     static {
-        securityPages.put(Role.ADMIN, Arrays.asList("/admin", "/user", "/payments","/statements","/cards","/users", "/accounts","/profile","/pending-cards"));
-        securityPages.put(Role.CUSTOMER, Arrays.asList("/user", "/payments","/statements","/cards", "/accounts","/profile"));
+        securityPages.put(Role.ADMIN, Arrays.asList("/admin", "/user", "/payments", "/statements", "/cards", "/users", "/accounts", "/profile", "/pending-cards"));
+        securityPages.put(Role.CUSTOMER, Arrays.asList("/user", "/payments", "/statements", "/cards", "/accounts", "/profile"));
 
     }
 
@@ -36,5 +36,4 @@ public class SecurityConfig {
     public static User getCurrentUser(HttpServletRequest request) {
         return (User) request.getSession().getAttribute("user");
     }
-
 }
